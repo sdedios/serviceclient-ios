@@ -1,1 +1,7 @@
+h1. ServiceClient for iOS
+
+p=. A simple iOS library for communicating with web services.
+
+
 h2. Coming soon... really!
+ 
