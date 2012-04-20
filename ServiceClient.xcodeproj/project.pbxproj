@@ -20,12 +20,28 @@
 		FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB70153F425400479972 /* DEServiceOperation.h */; };
 		FB66EB73153F43E900479972 /* DEServiceOperation_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB72153F43E900479972 /* DEServiceOperation_Internal.h */; };
 		FB66EB771540CD7D00479972 /* DEServiceClientDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */; };
+		FB66EBE21540EF5D00479972 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2451538FDB5002B7B71 /* UIKit.framework */; };
+		FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
+		FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB66EBE41540EF5D00479972 /* CoreGraphics.framework */; };
+		FB66EBEB1540EF5D00479972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBE91540EF5D00479972 /* InfoPlist.strings */; };
+		FB66EBED1540EF5D00479972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBEC1540EF5D00479972 /* main.m */; };
+		FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF01540EF5D00479972 /* AppDelegate.m */; };
+		FB66EBF41540EF5D00479972 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF31540EF5D00479972 /* ViewController.m */; };
+		FB66EBF71540EF5D00479972 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */; };
+		FB66EBFA1540EF5D00479972 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		FB2EB2481538FDB5002B7B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB2EB2291538FDB5002B7B71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB2EB2311538FDB5002B7B71;
+			remoteInfo = ServiceClient;
+		};
+		FB66EBFE1540EF7000479972 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB2EB2291538FDB5002B7B71 /* Project object */;
 			proxyType = 1;
@@ -52,6 +68,18 @@
 		FB66EB70153F425400479972 /* DEServiceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceOperation.h; sourceTree = "<group>"; };
 		FB66EB72153F43E900479972 /* DEServiceOperation_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceOperation_Internal.h; sourceTree = "<group>"; };
 		FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceClientDefines.m; sourceTree = "<group>"; };
+		FB66EBE01540EF5D00479972 /* ServiceClientDemos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServiceClientDemos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB66EBE41540EF5D00479972 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FB66EBE81540EF5D00479972 /* ServiceClientDemos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ServiceClientDemos-Info.plist"; sourceTree = "<group>"; };
+		FB66EBEA1540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FB66EBEC1540EF5D00479972 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FB66EBEE1540EF5D00479972 /* ServiceClientDemos-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ServiceClientDemos-Prefix.pch"; sourceTree = "<group>"; };
+		FB66EBEF1540EF5D00479972 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FB66EBF01540EF5D00479972 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FB66EBF21540EF5D00479972 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FB66EBF31540EF5D00479972 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FB66EBF61540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		FB66EBF91540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +103,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB66EBDD1540EF5D00479972 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB66EBE21540EF5D00479972 /* UIKit.framework in Frameworks */,
+				FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */,
+				FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,6 +121,7 @@
 			children = (
 				FB2EB2371538FDB5002B7B71 /* ServiceClient */,
 				FB2EB24B1538FDB5002B7B71 /* ServiceClientTests */,
+				FB66EBE61540EF5D00479972 /* ServiceClientDemos */,
 				FB2EB2341538FDB5002B7B71 /* Frameworks */,
 				FB2EB2331538FDB5002B7B71 /* Products */,
 			);
@@ -93,6 +132,7 @@
 			children = (
 				FB2EB2321538FDB5002B7B71 /* libserviceclient.a */,
 				FB2EB2421538FDB5002B7B71 /* ServiceClientTests.octest */,
+				FB66EBE01540EF5D00479972 /* ServiceClientDemos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,6 +143,7 @@
 				FB2EB2351538FDB5002B7B71 /* Foundation.framework */,
 				FB2EB2431538FDB5002B7B71 /* SenTestingKit.framework */,
 				FB2EB2451538FDB5002B7B71 /* UIKit.framework */,
+				FB66EBE41540EF5D00479972 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,6 +208,31 @@
 			path = Includes;
 			sourceTree = "<group>";
 		};
+		FB66EBE61540EF5D00479972 /* ServiceClientDemos */ = {
+			isa = PBXGroup;
+			children = (
+				FB66EBEF1540EF5D00479972 /* AppDelegate.h */,
+				FB66EBF01540EF5D00479972 /* AppDelegate.m */,
+				FB66EBF21540EF5D00479972 /* ViewController.h */,
+				FB66EBF31540EF5D00479972 /* ViewController.m */,
+				FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */,
+				FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */,
+				FB66EBE71540EF5D00479972 /* Supporting Files */,
+			);
+			path = ServiceClientDemos;
+			sourceTree = "<group>";
+		};
+		FB66EBE71540EF5D00479972 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB66EBE81540EF5D00479972 /* ServiceClientDemos-Info.plist */,
+				FB66EBE91540EF5D00479972 /* InfoPlist.strings */,
+				FB66EBEC1540EF5D00479972 /* main.m */,
+				FB66EBEE1540EF5D00479972 /* ServiceClientDemos-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -222,6 +288,24 @@
 			productReference = FB2EB2421538FDB5002B7B71 /* ServiceClientTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		FB66EBDF1540EF5D00479972 /* ServiceClientDemos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB66EBFB1540EF5D00479972 /* Build configuration list for PBXNativeTarget "ServiceClientDemos" */;
+			buildPhases = (
+				FB66EBDC1540EF5D00479972 /* Sources */,
+				FB66EBDD1540EF5D00479972 /* Frameworks */,
+				FB66EBDE1540EF5D00479972 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB66EBFF1540EF7000479972 /* PBXTargetDependency */,
+			);
+			name = ServiceClientDemos;
+			productName = ServiceClientDemos;
+			productReference = FB66EBE01540EF5D00479972 /* ServiceClientDemos.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -245,6 +329,7 @@
 			targets = (
 				FB2EB2311538FDB5002B7B71 /* ServiceClient */,
 				FB2EB2411538FDB5002B7B71 /* ServiceClientTests */,
+				FB66EBDF1540EF5D00479972 /* ServiceClientDemos */,
 			);
 		};
 /* End PBXProject section */
@@ -255,6 +340,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB2EB2501538FDB5002B7B71 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB66EBDE1540EF5D00479972 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB66EBEB1540EF5D00479972 /* InfoPlist.strings in Resources */,
+				FB66EBF71540EF5D00479972 /* ViewController_iPhone.xib in Resources */,
+				FB66EBFA1540EF5D00479972 /* ViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +405,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB66EBDC1540EF5D00479972 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB66EBED1540EF5D00479972 /* main.m in Sources */,
+				FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */,
+				FB66EBF41540EF5D00479972 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -317,6 +422,11 @@
 			isa = PBXTargetDependency;
 			target = FB2EB2311538FDB5002B7B71 /* ServiceClient */;
 			targetProxy = FB2EB2481538FDB5002B7B71 /* PBXContainerItemProxy */;
+		};
+		FB66EBFF1540EF7000479972 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB2EB2311538FDB5002B7B71 /* ServiceClient */;
+			targetProxy = FB66EBFE1540EF7000479972 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -327,6 +437,30 @@
 				FB2EB24F1538FDB5002B7B71 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FB66EBE91540EF5D00479972 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB66EBEA1540EF5D00479972 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB66EBF61540EF5D00479972 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB66EBF91540EF5D00479972 /* en */,
+			);
+			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -428,6 +562,43 @@
 			};
 			name = Release;
 		};
+		FB66EBFC1540EF5D00479972 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ServiceClientDemos/ServiceClientDemos-Prefix.pch";
+				INFOPLIST_FILE = "ServiceClientDemos/ServiceClientDemos-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FB66EBFD1540EF5D00479972 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ServiceClientDemos/ServiceClientDemos-Prefix.pch";
+				INFOPLIST_FILE = "ServiceClientDemos/ServiceClientDemos-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +628,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		FB66EBFB1540EF5D00479972 /* Build configuration list for PBXNativeTarget "ServiceClientDemos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB66EBFC1540EF5D00479972 /* Debug */,
+				FB66EBFD1540EF5D00479972 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

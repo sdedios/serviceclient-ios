@@ -89,6 +89,13 @@ typedef id DEServiceRequest;
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy;
 
+- (DEServiceOperation *)beginURLRequestAsync: (NSURLRequest *)request
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority;
+
 - (void)serviceOperationDidBegin: (DEServiceOperation *)operation;
 
 - (void)serviceOperationDidEnd: (DEServiceOperation *)operation;

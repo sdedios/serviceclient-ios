@@ -211,7 +211,23 @@
 	{
 		[request setHTTPBody: bodyData];
     }
-    
+
+    // process request
+    return [self beginURLRequestAsync: request 
+        format: format 
+        transform: transform 
+        completion: completion 
+        queuePriority: queuePriority 
+        dispatchPriority: dispatchPriority];
+}
+
+- (DEServiceOperation *)beginURLRequestAsync: (NSURLRequest *)request
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+{    
     // create request operation
     DEServiceOperation *operation = [[DEServiceOperation alloc]
         _initWithRequest: request
@@ -227,7 +243,6 @@
 
     return operation;
 }
-
 
 #pragma mark -
 #pragma mark DEServiceClientOperationDelegate Methdos
