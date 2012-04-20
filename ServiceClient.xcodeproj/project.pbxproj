@@ -13,6 +13,13 @@
 		FB2EB24A1538FDB5002B7B71 /* libserviceclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2321538FDB5002B7B71 /* libserviceclient.a */; };
 		FB2EB2501538FDB5002B7B71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB2EB24E1538FDB5002B7B71 /* InfoPlist.strings */; };
 		FB2EB2531538FDB5002B7B71 /* ServiceClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2EB2521538FDB5002B7B71 /* ServiceClientTests.m */; };
+		FB478BE51541E90400EA06F4 /* DEDemosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BE31541E90400EA06F4 /* DEDemosViewController.m */; };
+		FB478BEB1541E9A800EA06F4 /* DEDemosView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BE91541E9A800EA06F4 /* DEDemosView.xib */; };
+		FB478BEF1541F5D900EA06F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB478BEE1541F5D900EA06F4 /* UIKit.framework */; };
+		FB478BF71541FE5200EA06F4 /* DETwitterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BF61541FE5200EA06F4 /* DETwitterView.xib */; };
+		FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BF91542267100EA06F4 /* DEGithubViewController.m */; };
+		FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BFC154226B400EA06F4 /* DETwitterViewController.m */; };
+		FB478BFF154226DF00EA06F4 /* DEGithubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BFE154226DF00EA06F4 /* DEGithubView.xib */; };
 		FB64C120153900F40010136A /* DEServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB64C11D153900F40010136A /* DEServiceClient.m */; };
 		FB64C121153900F40010136A /* DEServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FB64C11F153900F40010136A /* DEServiceClient.h */; };
 		FB64C124153905E50010136A /* DEServiceClientDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = FB64C123153905E50010136A /* DEServiceClientDefines.h */; };
@@ -20,15 +27,10 @@
 		FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB70153F425400479972 /* DEServiceOperation.h */; };
 		FB66EB73153F43E900479972 /* DEServiceOperation_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB72153F43E900479972 /* DEServiceOperation_Internal.h */; };
 		FB66EB771540CD7D00479972 /* DEServiceClientDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */; };
-		FB66EBE21540EF5D00479972 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2451538FDB5002B7B71 /* UIKit.framework */; };
 		FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
 		FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB66EBE41540EF5D00479972 /* CoreGraphics.framework */; };
-		FB66EBEB1540EF5D00479972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBE91540EF5D00479972 /* InfoPlist.strings */; };
 		FB66EBED1540EF5D00479972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBEC1540EF5D00479972 /* main.m */; };
 		FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF01540EF5D00479972 /* AppDelegate.m */; };
-		FB66EBF41540EF5D00479972 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF31540EF5D00479972 /* ViewController.m */; };
-		FB66EBF71540EF5D00479972 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */; };
-		FB66EBFA1540EF5D00479972 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 /* End PBXBuildFile section */
@@ -56,11 +58,20 @@
 		FB2EB2391538FDB5002B7B71 /* ServiceClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ServiceClient-Prefix.pch"; sourceTree = "<group>"; };
 		FB2EB2421538FDB5002B7B71 /* ServiceClientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServiceClientTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2EB2431538FDB5002B7B71 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		FB2EB2451538FDB5002B7B71 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		FB2EB24D1538FDB5002B7B71 /* ServiceClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ServiceClientTests-Info.plist"; sourceTree = "<group>"; };
 		FB2EB24F1538FDB5002B7B71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB2EB2511538FDB5002B7B71 /* ServiceClientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceClientTests.h; sourceTree = "<group>"; };
 		FB2EB2521538FDB5002B7B71 /* ServiceClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceClientTests.m; sourceTree = "<group>"; };
+		FB478BE21541E90400EA06F4 /* DEDemosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEDemosViewController.h; sourceTree = "<group>"; };
+		FB478BE31541E90400EA06F4 /* DEDemosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEDemosViewController.m; sourceTree = "<group>"; };
+		FB478BE91541E9A800EA06F4 /* DEDemosView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEDemosView.xib; sourceTree = "<group>"; };
+		FB478BEE1541F5D900EA06F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FB478BF61541FE5200EA06F4 /* DETwitterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DETwitterView.xib; sourceTree = "<group>"; };
+		FB478BF81542267100EA06F4 /* DEGithubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubViewController.h; sourceTree = "<group>"; };
+		FB478BF91542267100EA06F4 /* DEGithubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubViewController.m; sourceTree = "<group>"; };
+		FB478BFB154226B400EA06F4 /* DETwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETwitterViewController.h; sourceTree = "<group>"; };
+		FB478BFC154226B400EA06F4 /* DETwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETwitterViewController.m; sourceTree = "<group>"; };
+		FB478BFE154226DF00EA06F4 /* DEGithubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEGithubView.xib; sourceTree = "<group>"; };
 		FB64C11D153900F40010136A /* DEServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceClient.m; sourceTree = "<group>"; };
 		FB64C11F153900F40010136A /* DEServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceClient.h; sourceTree = "<group>"; };
 		FB64C123153905E50010136A /* DEServiceClientDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceClientDefines.h; sourceTree = "<group>"; };
@@ -71,15 +82,10 @@
 		FB66EBE01540EF5D00479972 /* ServiceClientDemos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServiceClientDemos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB66EBE41540EF5D00479972 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FB66EBE81540EF5D00479972 /* ServiceClientDemos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ServiceClientDemos-Info.plist"; sourceTree = "<group>"; };
-		FB66EBEA1540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB66EBEC1540EF5D00479972 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB66EBEE1540EF5D00479972 /* ServiceClientDemos-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ServiceClientDemos-Prefix.pch"; sourceTree = "<group>"; };
 		FB66EBEF1540EF5D00479972 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB66EBF01540EF5D00479972 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FB66EBF21540EF5D00479972 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FB66EBF31540EF5D00479972 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		FB66EBF61540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		FB66EBF91540EF5D00479972 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB66EBE21540EF5D00479972 /* UIKit.framework in Frameworks */,
+				FB478BEF1541F5D900EA06F4 /* UIKit.framework in Frameworks */,
 				FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */,
 				FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -140,9 +146,9 @@
 		FB2EB2341538FDB5002B7B71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB478BEE1541F5D900EA06F4 /* UIKit.framework */,
 				FB2EB2351538FDB5002B7B71 /* Foundation.framework */,
 				FB2EB2431538FDB5002B7B71 /* SenTestingKit.framework */,
-				FB2EB2451538FDB5002B7B71 /* UIKit.framework */,
 				FB66EBE41540EF5D00479972 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -185,6 +191,52 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FB478BE11541E90400EA06F4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB478BF11541FD6200EA06F4 /* Github */,
+				FB478BF21541FD6200EA06F4 /* Twitter */,
+				FB478BE21541E90400EA06F4 /* DEDemosViewController.h */,
+				FB478BE31541E90400EA06F4 /* DEDemosViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FB478BE71541E9A800EA06F4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB478BE91541E9A800EA06F4 /* DEDemosView.xib */,
+				FB478BFE154226DF00EA06F4 /* DEGithubView.xib */,
+				FB478BF61541FE5200EA06F4 /* DETwitterView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FB478BF01541F64C00EA06F4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FB478BF11541FD6200EA06F4 /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				FB478BF81542267100EA06F4 /* DEGithubViewController.h */,
+				FB478BF91542267100EA06F4 /* DEGithubViewController.m */,
+			);
+			path = Github;
+			sourceTree = "<group>";
+		};
+		FB478BF21541FD6200EA06F4 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				FB478BFB154226B400EA06F4 /* DETwitterViewController.h */,
+				FB478BFC154226B400EA06F4 /* DETwitterViewController.m */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
 		FB64C11C153900F40010136A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,13 +263,12 @@
 		FB66EBE61540EF5D00479972 /* ServiceClientDemos */ = {
 			isa = PBXGroup;
 			children = (
+				FB478BE11541E90400EA06F4 /* Controllers */,
+				FB478BF01541F64C00EA06F4 /* Services */,
+				FB478BE71541E9A800EA06F4 /* Views */,
+				FB66EBE71540EF5D00479972 /* Supporting Files */,
 				FB66EBEF1540EF5D00479972 /* AppDelegate.h */,
 				FB66EBF01540EF5D00479972 /* AppDelegate.m */,
-				FB66EBF21540EF5D00479972 /* ViewController.h */,
-				FB66EBF31540EF5D00479972 /* ViewController.m */,
-				FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */,
-				FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */,
-				FB66EBE71540EF5D00479972 /* Supporting Files */,
 			);
 			path = ServiceClientDemos;
 			sourceTree = "<group>";
@@ -225,10 +276,9 @@
 		FB66EBE71540EF5D00479972 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FB66EBE81540EF5D00479972 /* ServiceClientDemos-Info.plist */,
-				FB66EBE91540EF5D00479972 /* InfoPlist.strings */,
 				FB66EBEC1540EF5D00479972 /* main.m */,
 				FB66EBEE1540EF5D00479972 /* ServiceClientDemos-Prefix.pch */,
+				FB66EBE81540EF5D00479972 /* ServiceClientDemos-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -347,9 +397,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB66EBEB1540EF5D00479972 /* InfoPlist.strings in Resources */,
-				FB66EBF71540EF5D00479972 /* ViewController_iPhone.xib in Resources */,
-				FB66EBFA1540EF5D00479972 /* ViewController_iPad.xib in Resources */,
+				FB478BEB1541E9A800EA06F4 /* DEDemosView.xib in Resources */,
+				FB478BF71541FE5200EA06F4 /* DETwitterView.xib in Resources */,
+				FB478BFF154226DF00EA06F4 /* DEGithubView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +461,9 @@
 			files = (
 				FB66EBED1540EF5D00479972 /* main.m in Sources */,
 				FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */,
-				FB66EBF41540EF5D00479972 /* ViewController.m in Sources */,
+				FB478BE51541E90400EA06F4 /* DEDemosViewController.m in Sources */,
+				FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */,
+				FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,30 +489,6 @@
 				FB2EB24F1538FDB5002B7B71 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		FB66EBE91540EF5D00479972 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB66EBEA1540EF5D00479972 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		FB66EBF51540EF5D00479972 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB66EBF61540EF5D00479972 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		FB66EBF81540EF5D00479972 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB66EBF91540EF5D00479972 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -636,6 +664,7 @@
 				FB66EBFD1540EF5D00479972 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -14,6 +14,19 @@
  * limitations under the License.
  */
  
-@interface ViewController : UIViewController
+#pragma mark Class Declaration
+ 
+@interface DEDemosViewController : UIViewController<
+    UITableViewDelegate,
+    UITableViewDataSource>
+{
+    @private __weak UITableView *_tableView;
+}
 
-@end
+#pragma mark -
+#pragma mark Properties
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+
+@end  // @interface DEDemosViewController

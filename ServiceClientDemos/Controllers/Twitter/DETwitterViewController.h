@@ -14,24 +14,19 @@
  * limitations under the License.
  */
  
+#pragma mark Class Declaration
  
-#pragma mark Forward Declarations
- 
-@class ViewController;
-
-
-#pragma mark -
-#pragma mark Class Definition
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
+@interface DETwitterViewController : UIViewController<
+    UITableViewDelegate,
+    UITableViewDataSource>
+{
+    @private __weak UITableView *_tableView;
+}
 
 #pragma mark -
 #pragma mark Properties
 
-@property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) ViewController *viewController;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 
-@end  // @interface AppDelegate
+@end  // @interface DETwitterViewController
