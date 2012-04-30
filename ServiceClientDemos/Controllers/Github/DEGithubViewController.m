@@ -27,6 +27,15 @@
 #pragma mark Internal Interface
 
 @interface DEGithubViewController ()
+{
+    @private __weak UITableView *_tableView;
+    @private __weak UIView *_loginPanel;
+    @private __weak UITextField *_usernameField;
+    @private __weak UITextField *_passwordField;
+    @private __weak UIView *_messagePanel;
+    @private __weak UILabel *_messageLabel;
+    @private __weak UITextField *_firstResponder;
+}
 
 @end  // @interface DEGithubViewController ()
 
@@ -41,6 +50,11 @@
 #pragma mark Properties
 
 @synthesize tableView = _tableView;
+@synthesize loginPanel = _loginPanel;
+@synthesize usernameField = _usernameField;
+@synthesize passwordField = _passwordField;
+@synthesize messagePanel = _messagePanel;
+@synthesize messageLabel = _messageLabel;
 
 
 #pragma mark -
@@ -63,6 +77,18 @@
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (IBAction)login
+{
+    // show message
+    _messageLabel.text = @"Logging into Github...";
+    _messagePanel.hidden = NO;
+}
+
+- (IBAction)resignResponder
+{
+    [_firstResponder resignFirstResponder];
+}
 
 
 #pragma mark -
@@ -87,6 +113,12 @@
 	
 	// set title
     self.title = @"Github Client";
+    
+    // show login if not authenticated
+    if (YES)
+    {
+        _loginPanel.hidden = NO;
+    }
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -164,6 +196,38 @@
 {
     [tableView deselectRowAtIndexPath: indexPath 
         animated: YES];
+}
+
+
+#pragma mark -
+#pragma mark UITextFieldDelegate Methods
+
+- (void)textFieldDidBeginEditing: (UITextField *)textField
+{
+    _firstResponder = textField;
+}
+
+- (void)textFieldDidEndEditing: (UITextField *)textField
+{
+    _firstResponder = nil;
+}
+
+- (BOOL)textFieldShouldReturn: (UITextField *)textField
+{
+    if (textField == _usernameField)
+    {
+        [_passwordField becomeFirstResponder];
+    }
+    else if (textField == _passwordField)
+    {
+        // release keyboard focus
+        [_passwordField resignFirstResponder];
+        
+        // login
+        [self login];
+    }
+    
+    return YES;
 }
 
 

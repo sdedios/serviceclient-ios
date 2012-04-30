@@ -13,31 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#import "DEServiceClient.h"
+ 
  
 #pragma mark Class Declaration
  
-@interface DEGithubViewController : UIViewController<
-    UITableViewDelegate,
-    UITableViewDataSource,
-    UITextFieldDelegate>
+@interface DEGithubClient : DEServiceClient
 
 #pragma mark -
 #pragma mark Properties
-
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIView *loginPanel;
-@property (nonatomic, weak) IBOutlet UITextField *usernameField;
-@property (nonatomic, weak) IBOutlet UITextField *passwordField;
-@property (nonatomic, weak) IBOutlet UIView *messagePanel;
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
 
 #pragma mark -
 #pragma mark Methods
 
-- (IBAction)login;
 
-- (IBAction)resignResponder;
-
-
-@end  // @interface DEGithubViewController
+@end  // @interface DEGithubClient

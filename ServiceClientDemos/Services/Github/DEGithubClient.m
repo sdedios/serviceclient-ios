@@ -14,30 +14,45 @@
  * limitations under the License.
  */
  
-#pragma mark Class Declaration
- 
-@interface DEGithubViewController : UIViewController<
-    UITableViewDelegate,
-    UITableViewDataSource,
-    UITextFieldDelegate>
+#import "DEGithubClient.h"
+
+
+#pragma mark Constants
+
+//static NSString * const SomeString = @"";
+//#define SomeContant 1.0
+
+
+#pragma mark -
+#pragma mark Internal Interface
+
+@interface DEGithubClient ()
+{
+}
+
+@end  // @interface DEGithubClient ()
+
+
+#pragma mark -
+#pragma mark Class Definition
+
+@implementation DEGithubClient
+
 
 #pragma mark -
 #pragma mark Properties
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIView *loginPanel;
-@property (nonatomic, weak) IBOutlet UITextField *usernameField;
-@property (nonatomic, weak) IBOutlet UITextField *passwordField;
-@property (nonatomic, weak) IBOutlet UIView *messagePanel;
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
+
+#pragma mark -
+#pragma mark Constructors
 
 
 #pragma mark -
-#pragma mark Methods
-
-- (IBAction)login;
-
-- (IBAction)resignResponder;
+#pragma mark Public Methods
 
 
-@end  // @interface DEGithubViewController
+#pragma mark -
+#pragma mark Overridden Methods
+
+
+@end  // @interface DEGithubClient

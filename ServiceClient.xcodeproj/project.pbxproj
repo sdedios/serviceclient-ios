@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB011D4B154F288D00A397EE /* libserviceclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2321538FDB5002B7B71 /* libserviceclient.a */; };
 		FB2EB2361538FDB5002B7B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
 		FB2EB2441538FDB5002B7B71 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2431538FDB5002B7B71 /* SenTestingKit.framework */; };
 		FB2EB2471538FDB5002B7B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
@@ -25,12 +26,12 @@
 		FB64C124153905E50010136A /* DEServiceClientDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = FB64C123153905E50010136A /* DEServiceClientDefines.h */; };
 		FB64C126153910250010136A /* DEServiceOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FB64C125153910250010136A /* DEServiceOperation.m */; };
 		FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB70153F425400479972 /* DEServiceOperation.h */; };
-		FB66EB73153F43E900479972 /* DEServiceOperation_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB66EB72153F43E900479972 /* DEServiceOperation_Internal.h */; };
 		FB66EB771540CD7D00479972 /* DEServiceClientDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */; };
 		FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
 		FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB66EBE41540EF5D00479972 /* CoreGraphics.framework */; };
 		FB66EBED1540EF5D00479972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBEC1540EF5D00479972 /* main.m */; };
 		FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF01540EF5D00479972 /* AppDelegate.m */; };
+		FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB78153C1548E1A300D8176A /* DEGithubClient.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,8 @@
 		FB66EBEE1540EF5D00479972 /* ServiceClientDemos-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ServiceClientDemos-Prefix.pch"; sourceTree = "<group>"; };
 		FB66EBEF1540EF5D00479972 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB66EBF01540EF5D00479972 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FB78153B1548E1A300D8176A /* DEGithubClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubClient.h; sourceTree = "<group>"; };
+		FB78153C1548E1A300D8176A /* DEGithubClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubClient.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB011D4B154F288D00A397EE /* libserviceclient.a in Frameworks */,
 				FB478BEF1541F5D900EA06F4 /* UIKit.framework in Frameworks */,
 				FB66EBE31540EF5D00479972 /* Foundation.framework in Frameworks */,
 				FB66EBE51540EF5D00479972 /* CoreGraphics.framework in Frameworks */,
@@ -215,6 +219,7 @@
 		FB478BF01541F64C00EA06F4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FB7815391548E16B00D8176A /* Github */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -283,6 +288,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FB7815391548E16B00D8176A /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				FB78153B1548E1A300D8176A /* DEGithubClient.h */,
+				FB78153C1548E1A300D8176A /* DEGithubClient.m */,
+			);
+			path = Github;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -294,7 +308,6 @@
 				FB64C124153905E50010136A /* DEServiceClientDefines.h in Headers */,
 				FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */,
 				FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */,
-				FB66EB73153F43E900479972 /* DEServiceOperation_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +321,7 @@
 				FB2EB22E1538FDB5002B7B71 /* Sources */,
 				FB2EB22F1538FDB5002B7B71 /* Frameworks */,
 				FB2EB2301538FDB5002B7B71 /* Headers */,
-				FB64C122153901AD0010136A /* ShellScript */,
+				FB011D4C154F28ED00A397EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -406,20 +419,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		FB2EB2401538FDB5002B7B71 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		FB64C122153901AD0010136A /* ShellScript */ = {
+		FB011D4C154F28ED00A397EE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -432,6 +432,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Version 2.0 (updated for Xcode 4, with some fixes)\n# Changes:\n#    - Works with xcode 4, even when running xcode 3 projects (Workarounds for apple bugs)\n#    - Faster / better: only runs lipo once, instead of once per recursion\n#    - Added some debugging statemetns that can be switched on/off by changing the DEBUG_THIS_SCRIPT variable to \"true\"\n#    - Fixed some typos\n# \n# Purpose:\n#   Create a static library for iPhone from within XCode\n#   Because Apple staff DELIBERATELY broke Xcode to make this impossible from the GUI (Xcode 3.2.3 specifically states this in the Release notes!)\n#   ...no, I don't understand why they did this!\n#\n# Author: Adam Martin - http://twitter.com/redglassesapps\n# Based on: original script from Eonil (main changes: Eonil's script WILL NOT WORK in Xcode GUI - it WILL CRASH YOUR COMPUTER)\n#\n# More info: see this Stack Overflow question: http://stackoverflow.com/questions/3520977/build-fat-static-library-device-simulator-using-xcode-and-sdk-4\n\n#################[ Tests: helps workaround any future bugs in Xcode ]########\n#\nDEBUG_THIS_SCRIPT=\"false\"\n\nif [ $DEBUG_THIS_SCRIPT = \"true\" ]\nthen\necho \"########### TESTS #############\"\necho \"Use the following variables when debugging this script; note that they may change on recursions\"\necho \"BUILD_DIR = $BUILD_DIR\"\necho \"BUILD_ROOT = $BUILD_ROOT\"\necho \"CONFIGURATION_BUILD_DIR = $CONFIGURATION_BUILD_DIR\"\necho \"BUILT_PRODUCTS_DIR = $BUILT_PRODUCTS_DIR\"\necho \"CONFIGURATION_TEMP_DIR = $CONFIGURATION_TEMP_DIR\"\necho \"TARGET_BUILD_DIR = $TARGET_BUILD_DIR\"\nfi\n\n#####################[ part 1 ]##################\n# First, work out the BASESDK version number (NB: Apple ought to report this, but they hide it)\n#    (incidental: searching for substrings in sh is a nightmare! Sob)\n\nSDK_VERSION=$(echo ${SDK_NAME} | grep -o '.\\{3\\}$')\n\n# Next, work out if we're in SIM or DEVICE\n\nif [ ${PLATFORM_NAME} = \"iphonesimulator\" ]\nthen\nOTHER_SDK_TO_BUILD=iphoneos${SDK_VERSION}\nelse\nOTHER_SDK_TO_BUILD=iphonesimulator${SDK_VERSION}\nfi\n\necho \"XCode has selected SDK: ${PLATFORM_NAME} with version: ${SDK_VERSION} (although back-targetting: ${IPHONEOS_DEPLOYMENT_TARGET})\"\necho \"...therefore, OTHER_SDK_TO_BUILD = ${OTHER_SDK_TO_BUILD}\"\n#\n#####################[ end of part 1 ]##################\n\n#####################[ part 2 ]##################\n#\n# IF this is the original invocation, invoke WHATEVER other builds are required\n#\n# Xcode is already building ONE target...\n#\n# ...but this is a LIBRARY, so Apple is wrong to set it to build just one.\n# ...we need to build ALL targets\n# ...we MUST NOT re-build the target that is ALREADY being built: Xcode WILL CRASH YOUR COMPUTER if you try this (infinite recursion!)\n#\n#\n# So: build ONLY the missing platforms/configurations.\n\nif [ \"true\" == ${ALREADYINVOKED:-false} ]\nthen\necho \"RECURSION: I am NOT the root invocation, so I'm NOT going to recurse\"\nelse\n# CRITICAL:\n# Prevent infinite recursion (Xcode sucks)\nexport ALREADYINVOKED=\"true\"\n\necho \"RECURSION: I am the root ... recursing all missing build targets NOW...\"\necho \"RECURSION: ...about to invoke: xcodebuild -configuration \\\"${CONFIGURATION}\\\" -target \\\"${TARGET_NAME}\\\" -sdk \\\"${OTHER_SDK_TO_BUILD}\\\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO\"\nxcodebuild -configuration \"${CONFIGURATION}\" -target \"${TARGET_NAME}\" -sdk \"${OTHER_SDK_TO_BUILD}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nACTION=\"build\"\n\n#Merge all platform binaries as a fat binary for each configurations.\n\n# Calculate where the (multiple) built files are coming from:\nCURRENTCONFIG_DEVICE_DIR=${SYMROOT}/${CONFIGURATION}-iphoneos\nCURRENTCONFIG_SIMULATOR_DIR=${SYMROOT}/${CONFIGURATION}-iphonesimulator\n\necho \"Taking device build from: ${CURRENTCONFIG_DEVICE_DIR}\"\necho \"Taking simulator build from: ${CURRENTCONFIG_SIMULATOR_DIR}\"\n\nCREATING_UNIVERSAL_DIR=${SYMROOT}/${CONFIGURATION}-universal\necho \"...I will output a universal build to: ${CREATING_UNIVERSAL_DIR}\"\n\n# ... remove the products of previous runs of this script\n#      NB: this directory is ONLY created by this script - it should be safe to delete!\n\nrm -rf \"${CREATING_UNIVERSAL_DIR}\"\nmkdir \"${CREATING_UNIVERSAL_DIR}\"\n\n#\necho \"lipo: for current configuration (${CONFIGURATION}) creating output file: ${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\"\nlipo -create -output \"${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_DEVICE_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_SIMULATOR_DIR}/${EXECUTABLE_NAME}\"\n\nmkdir -p \"${CREATING_UNIVERSAL_DIR}/Includes\"\necho \"rsync (${SOURCE_ROOT}/${TARGET_NAME}/Includes) (${CREATING_UNIVERSAL_DIR})\"\nrsync -avC \"${SOURCE_ROOT}/${TARGET_NAME}/Includes\" \"${CREATING_UNIVERSAL_DIR}\"\nfi";
 			showEnvVarsInLog = 0;
+		};
+		FB2EB2401538FDB5002B7B71 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -464,6 +477,7 @@
 				FB478BE51541E90400EA06F4 /* DEDemosViewController.m in Sources */,
 				FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */,
 				FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */,
+				FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +616,11 @@
 				GCC_PREFIX_HEADER = "ServiceClientDemos/ServiceClientDemos-Prefix.pch";
 				INFOPLIST_FILE = "ServiceClientDemos/ServiceClientDemos-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/ServiceClient\"";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -620,7 +639,12 @@
 				GCC_PREFIX_HEADER = "ServiceClientDemos/ServiceClientDemos-Prefix.pch";
 				INFOPLIST_FILE = "ServiceClientDemos/ServiceClientDemos-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/ServiceClient\"";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
