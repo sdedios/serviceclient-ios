@@ -24,9 +24,16 @@
 #pragma mark -
 #pragma mark Properties
 
+@property (nonatomic, copy) NSString *accessToken;
+
 
 #pragma mark -
 #pragma mark Methods
 
+- (void)loginWithUsername: (NSString *)username
+    password: (NSString *)password
+    completion: (void (^)(DEServiceResult result, NSInteger statusCode))completion;
+
+- (void)getReposWithCompletion: (void (^)(DEServiceResult result, NSArray *repos))completion;
 
 @end  // @interface DEGithubClient

@@ -32,6 +32,7 @@
 		FB66EBED1540EF5D00479972 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBEC1540EF5D00479972 /* main.m */; };
 		FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF01540EF5D00479972 /* AppDelegate.m */; };
 		FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB78153C1548E1A300D8176A /* DEGithubClient.m */; };
+		FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,8 @@
 		FB66EBF01540EF5D00479972 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FB78153B1548E1A300D8176A /* DEGithubClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubClient.h; sourceTree = "<group>"; };
 		FB78153C1548E1A300D8176A /* DEGithubClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubClient.m; sourceTree = "<group>"; };
+		FB7C08BC1550CAC400428C89 /* DEGithubRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubRepo.h; sourceTree = "<group>"; };
+		FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubRepo.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,6 +296,8 @@
 			children = (
 				FB78153B1548E1A300D8176A /* DEGithubClient.h */,
 				FB78153C1548E1A300D8176A /* DEGithubClient.m */,
+				FB7C08BC1550CAC400428C89 /* DEGithubRepo.h */,
+				FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */,
 				FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */,
 				FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */,
+				FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

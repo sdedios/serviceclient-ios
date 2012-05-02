@@ -22,6 +22,9 @@
 #pragma mark -
 #pragma mark Methods
 
++ (NSString *)base64EncodeString: (NSString *)string;
++ (NSString *)base64Encode: (NSData *)data;
+
 + (NSString *)stringByEscapingURLArgument: (NSString *)argument;
 + (NSString *)stringByUnescapingURLArgument: (NSString *)argument;
 

@@ -35,7 +35,8 @@
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
-    serviceClient: (DEServiceClient *)serviceClient;
+    serviceClient: (DEServiceClient *)serviceClient
+    context: (id)context;
 
 
 @end  // @interface DEServiceOperation()

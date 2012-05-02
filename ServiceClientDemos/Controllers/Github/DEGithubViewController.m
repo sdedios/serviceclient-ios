@@ -15,16 +15,11 @@
  */
  
 #import "DEGithubViewController.h"
+#import "DEGithubClient.h"
+#import "DEGithubRepo.h"
 
 
-#pragma mark Constants
-
-//static NSString * const SomeString = @"";
-//#define SomeContant 1.0
-
-
-#pragma mark -
-#pragma mark Internal Interface
+#pragma mark Class Extension
 
 @interface DEGithubViewController ()
 {
@@ -35,7 +30,16 @@
     @private __weak UIView *_messagePanel;
     @private __weak UILabel *_messageLabel;
     @private __weak UITextField *_firstResponder;
+    
+    @private __strong DEGithubClient *_githubClient;
+    @private __strong NSMutableArray *_repos;
 }
+
+#pragma mark -
+#pragma mark Methods
+
+- (void)refreshRepos;
+
 
 @end  // @interface DEGithubViewController ()
 
@@ -70,7 +74,11 @@
 		return nil;
     }
 	
-	// TODO: initialize instance variables
+	// initialize instance variables
+    _githubClient = [[DEGithubClient alloc]
+        init];
+    _repos = [[NSMutableArray alloc]
+        initWithCapacity: 10];
 	
     return self;
 }
@@ -83,6 +91,47 @@
     // show message
     _messageLabel.text = @"Logging into Github...";
     _messagePanel.hidden = NO;
+    
+    // TODO: validate crendentials
+    NSString *username = _usernameField.text;
+    NSString *password = _passwordField.text;
+    
+    // login with client
+    [_githubClient loginWithUsername: username 
+        password: password 
+        completion: ^(DEServiceResult result, NSInteger statusCode) 
+        {
+            // handle success
+            NSInteger statusFamily = statusCode / 100;
+            if (result == DEServiceResultSuccess
+                && statusFamily == 2)
+            {
+                // hide message and login
+                _messagePanel.hidden = YES;
+                _loginPanel.hidden = YES;
+                
+                // load repos
+                [self refreshRepos];
+            }
+            
+            // github uses 400-series for invalid creds
+            else if (statusFamily == 4)
+            {
+                _messageLabel.text = @"Invalid username or password.";
+            }
+            
+            // handle service unavailable
+            else if (statusFamily == 5)
+            {
+                _messageLabel.text = @"The server is currently unavailable, please try again later.";
+            }
+            
+            // handle unexpected error
+            else 
+            {
+                _messageLabel.text = @"An unexpected error occurred.";
+            }
+        }];
 }
 
 - (IBAction)resignResponder
@@ -115,9 +164,18 @@
     self.title = @"Github Client";
     
     // show login if not authenticated
-    if (YES)
+    NSString *accessToken = _githubClient.accessToken;
+    if (accessToken == nil
+        || [[NSNull null] isEqual: accessToken] == YES)
     {
         _loginPanel.hidden = NO;
+        _usernameField.text = @"sdedios";
+    }
+    
+    // otherwise, load repos
+    else 
+    {
+       [self refreshRepos];
     }
 }
 
@@ -145,44 +203,52 @@
 
 
 #pragma mark -
+#pragma mark Private Methods
+
+- (void)refreshRepos
+{
+    // request repos
+    [_githubClient getReposWithCompletion:^(DEServiceResult result, 
+        NSArray *repos) 
+    {
+        // repopulate repos
+        [_repos removeAllObjects];
+        [_repos addObjectsFromArray: repos];
+        
+        // refresh table
+        [_tableView reloadData];
+    }];
+}
+
+
+#pragma mark -
 #pragma mark UITableViewDataSource Methods
 
 - (NSInteger)tableView: (UITableView *)tableView 
     numberOfRowsInSection: (NSInteger)section
 {
-    return 3;
+    return [_repos count];
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView 
     cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
     // reuse cell if possible (or create one)
-    static NSString *cellIdentifier = @"link";
+    static NSString *cellIdentifier = @"repo";
     UITableViewCell *cell = [tableView 
         dequeueReusableCellWithIdentifier: cellIdentifier];
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc]
-            initWithStyle: UITableViewCellStyleDefault 
+            initWithStyle: UITableViewCellStyleSubtitle 
             reuseIdentifier: cellIdentifier];
     }
-    
-    // initialize cell
-    switch (indexPath.row)
-    {
-        case 0:
-            cell.textLabel.text = @"Twitter Client";
-            break;
-            
-        case 1:
-            cell.textLabel.text = @"QR Code Client";
-            break;
-            
-        case 2:
-            cell.textLabel.text = @"Random Client";
-            break;
-    }
-    
+
+    // fetch entity
+    DEGithubRepo *repo = [_repos objectAtIndex: indexPath.row];
+    cell.textLabel.text = repo.name;
+    cell.detailTextLabel.text = repo.desc;
+
     // return cell
     return cell;
 }

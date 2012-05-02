@@ -16,7 +16,6 @@
 
 #import "DEServiceClient.h"
 #import "DEServiceOperation_Internal.h"
-#import "DEServiceHelper.h"
 
 
 #pragma mark Constants
@@ -87,6 +86,7 @@
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    context: (id)context
 {
     return [self beginRequestAsync: uri 
         method: method 
@@ -98,7 +98,8 @@
         completion: completion
         queuePriority: NSOperationQueuePriorityNormal 
         dispatchPriority: DISPATCH_QUEUE_PRIORITY_DEFAULT 
-        cachePolicy: NSURLRequestUseProtocolCachePolicy];
+        cachePolicy: NSURLRequestUseProtocolCachePolicy
+        context: context];
 }
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
@@ -112,6 +113,7 @@
     queuePriority: (NSOperationQueuePriority)queuePriority
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context
 {
 	// encode body data, if provided
 	NSData *bodyData = nil;
@@ -132,7 +134,8 @@
         completion: completion
         queuePriority: queuePriority 
         dispatchPriority: dispatchPriority 
-        cachePolicy: cachePolicy];
+        cachePolicy: cachePolicy
+        context: context];
 }
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
@@ -143,6 +146,7 @@
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    context: (id)context
 {
     return [self beginRequestAsync: uri 
         method: method 
@@ -154,7 +158,8 @@
         completion: completion
         queuePriority: NSOperationQueuePriorityNormal 
         dispatchPriority: DISPATCH_QUEUE_PRIORITY_DEFAULT 
-        cachePolicy: NSURLRequestUseProtocolCachePolicy];
+        cachePolicy: NSURLRequestUseProtocolCachePolicy
+        context: context];
 }
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
@@ -168,6 +173,7 @@
     queuePriority: (NSOperationQueuePriority)queuePriority
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context
 {
     // apply query parameters (if any)
     if (parameters != nil
@@ -218,7 +224,8 @@
         transform: transform 
         completion: completion 
         queuePriority: queuePriority 
-        dispatchPriority: dispatchPriority];
+        dispatchPriority: dispatchPriority
+        context: context];
 }
 
 - (DEServiceOperation *)beginURLRequestAsync: (NSURLRequest *)request
@@ -227,6 +234,7 @@
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     queuePriority: (NSOperationQueuePriority)queuePriority
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    context: (id)context
 {    
     // create request operation
     DEServiceOperation *operation = [[DEServiceOperation alloc]
@@ -235,7 +243,8 @@
         dispatchPriority: dispatchPriority 
         transform: transform
         completion: completion
-        serviceClient: self];
+        serviceClient: self
+        context: context];
     [operation setQueuePriority: queuePriority];
     
     // start operation
@@ -258,6 +267,12 @@
 - (void)serviceOperationFailed: (DEServiceOperation *)operation
     error: (NSError *)error
 {
+}
+
+- (NSURLCredential *)credentialForServiceOperation: (DEServiceOperation *)operation
+    challenge: (NSURLAuthenticationChallenge *)challenge
+{
+    return nil;
 }
 
 - (id)serviceOperation: (DEServiceOperation *)operation

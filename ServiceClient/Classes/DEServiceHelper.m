@@ -17,7 +17,14 @@
 #import "DEServiceHelper.h"
 
 
-#pragma Class Definition
+#pragma mark Class Variables
+
+static const char *_base64EncodingTable = 
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+
+#pragma mark -
+#pragma mark Class Definition
 
 @implementation DEServiceHelper
 
@@ -34,6 +41,95 @@
 
 #pragma mark -
 #pragma mark Public Methods
+
++ (NSString *)base64EncodeString: (NSString *)string
+{
+    NSData *data = [string dataUsingEncoding: NSUTF8StringEncoding];
+    return [self base64Encode: data];
+}
+
++ (NSString *)base64Encode: (NSData *)data
+{
+    // skip if no data
+    int bytesRemaining = [data length];
+    if (bytesRemaining == 0)
+    {
+        return nil;
+    }
+    
+    // create input/output buffers
+    const unsigned char *inputReader = [data bytes];
+    char *outputBuffer = (char *)calloc(((bytesRemaining + 2) / 3) * 4, 
+        sizeof(char));
+    char *outputWriter = outputBuffer;
+
+    // convert until less than 3 bytes remain
+    const char * const encodingTable = _base64EncodingTable;
+    while (bytesRemaining > 2) 
+    {
+        // convert
+        *outputWriter++ = encodingTable[inputReader[0] >> 2];
+        *outputWriter++ = encodingTable[((inputReader[0] & 0x03) << 4) 
+            + (inputReader[1] >> 4)];
+        *outputWriter++ = encodingTable[((inputReader[1] & 0x0f) << 2) 
+            + (inputReader[2] >> 6)];
+        *outputWriter++ = encodingTable[inputReader[2] & 0x3f];
+
+        // update trackers
+        inputReader += 3;
+        bytesRemaining -= 3; 
+    }
+
+    // finalize conversion
+    if (bytesRemaining > 0) 
+    {
+        // convert first byte
+        *outputWriter++ = encodingTable[inputReader[0] >> 2];
+        
+        // convert remaining (if more than 1)
+        if (bytesRemaining > 1) 
+        {
+            *outputWriter++ = encodingTable[((inputReader[0] & 0x03) << 4) 
+                + (inputReader[1] >> 4)];
+            *outputWriter++ = encodingTable[(inputReader[1] & 0x0f) << 2];
+            *outputWriter++ = '=';
+        } 
+        
+        // or convert last byte and pad
+        else 
+        {
+            *outputWriter++ = encodingTable[(inputReader[0] & 0x03) << 4];
+            *outputWriter++ = '=';
+            *outputWriter++ = '=';
+        }
+    }
+
+    // terminate with eos (null character)
+    *outputWriter = '\0';
+
+    // return string
+    return [NSString stringWithCString: outputBuffer 
+        encoding: NSASCIIStringEncoding];
+}
+
+static const short _base64DecodingTable[256] = {
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 62, -2, -2, -2, 63,
+    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -2, -2, -2, -2, -2, -2,
+    -2,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -2, -2, -2, -2, -2,
+    -2, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+    -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
+};
 
 + (NSString *)stringByEscapingURLArgument: (NSString *)argument
 {

@@ -35,8 +35,9 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     @private __strong NSURLRequest *_request;
     @private DEServiceFormat _format;
     @private dispatch_queue_priority_t _dispatchPriority;
-    @private id (^_transform)(NSHTTPURLResponse *, id);
-    @private void (^_completion)(DEServiceResult, NSHTTPURLResponse *, id);
+    @private id (__strong ^_transform)(NSHTTPURLResponse *, id);
+    @private void (__strong ^_completion)(DEServiceResult, NSHTTPURLResponse *, id);
+    @private __strong id _context;
     @private __strong NSHTTPURLResponse *_response;
     @private __strong NSMutableData *_responseData;
 	@private BOOL _executing;
@@ -66,6 +67,12 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 
 #pragma mark -
+#pragma mark Properties
+
+@synthesize context = _context;
+
+
+#pragma mark -
 #pragma mark Constructors
 
 - (id)_initWithRequest: (NSURLRequest *)request
@@ -73,7 +80,8 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     transform: (id (^)(NSHTTPURLResponse *, id))transform
     completion: (void (^)(DEServiceResult, NSHTTPURLResponse *, id))completion
-    serviceClient: (DEServiceClient *)serviceClient    
+    serviceClient: (DEServiceClient *)serviceClient 
+    context: (id)context   
 {
     // abort if base initializer fails
 	if ((self = [super init]) == nil)
@@ -88,6 +96,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     _transform = transform == 0 ? nil : [transform copy];
     _completion = completion == 0 ? nil : [completion copy];
     _serviceClient = serviceClient;
+    _context = context;
 
 	return self;
 }
@@ -356,6 +365,42 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
+
+- (void)connection: (NSURLConnection *)connection
+    didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
+{
+    // cancel if not first attempt
+    NSInteger retryCount = challenge.previousFailureCount;
+    if (retryCount != 0)
+    {
+        // cancel authentication
+        [challenge.sender cancelAuthenticationChallenge: challenge];
+        
+        // TODO: notify service client
+        
+        // stop processing
+        return;
+    }
+    
+    // get credential from service client
+    NSURLCredential *credential = [_serviceClient 
+        credentialForServiceOperation: self
+        challenge: challenge];
+    
+    // use credential if provided
+    if (credential != nil
+        && [[NSNull null] isEqual: credential] == NO)
+    {
+        [challenge.sender useCredential: credential 
+            forAuthenticationChallenge: challenge];
+    }
+    
+    // or cancel challenge
+    else 
+    {
+        [challenge.sender cancelAuthenticationChallenge: challenge];
+    }
+}
 
 - (void)connection: (NSURLConnection *)connection 
 	didReceiveResponse: (NSURLResponse *)response

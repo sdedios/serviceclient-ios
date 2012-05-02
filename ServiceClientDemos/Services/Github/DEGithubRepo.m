@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
-#import "DEServiceClientDefines.h"
- 
+#import "DEGithubRepo.h"
 
-#pragma mark Class Declaration
 
-@interface DEServiceOperation : NSOperation
+#pragma mark Class Extension
+
+@interface DEGithubRepo ()
+{
+    @private __strong NSString *_name;
+    @private __strong NSString *_desc;
+}
+
+@end  // @interface DEGithubRepo ()
+
+
+#pragma mark -
+#pragma mark Class Definition
+
+@implementation DEGithubRepo
 
 
 #pragma mark -
 #pragma mark Properties
 
-@property (nonatomic, strong) id context;
+@synthesize name = _name;
+@synthesize desc = _desc;
 
 
-@end  // @interface DEServiceOperation
+@end  // @interface DEGithubRepo

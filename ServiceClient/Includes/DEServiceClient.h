@@ -15,6 +15,7 @@
  */
 
 #import "DEServiceOperation.h"
+#import "DEServiceHelper.h"
 
 
 #pragma mark Type Definitions
@@ -54,7 +55,8 @@ typedef id DEServiceRequest;
     body: (NSString *)body 
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
-    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion;
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    context: (id)context;
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
     method: (DEServiceMethod)method
@@ -66,7 +68,8 @@ typedef id DEServiceRequest;
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     queuePriority: (NSOperationQueuePriority)queuePriority
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
-    cachePolicy: (NSURLRequestCachePolicy)cachePolicy;
+    cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context;
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
     method: (DEServiceMethod)method
@@ -75,7 +78,8 @@ typedef id DEServiceRequest;
     bodyData: (NSData *)bodyData 
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
-    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion;
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    context: (id)context;
 
 - (DEServiceOperation *)beginRequestAsync: (NSString *)uri
     method: (DEServiceMethod)method
@@ -87,14 +91,16 @@ typedef id DEServiceRequest;
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     queuePriority: (NSOperationQueuePriority)queuePriority
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
-    cachePolicy: (NSURLRequestCachePolicy)cachePolicy;
+    cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context;
 
 - (DEServiceOperation *)beginURLRequestAsync: (NSURLRequest *)request
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     queuePriority: (NSOperationQueuePriority)queuePriority
-    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority;
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    context: (id)context;
 
 - (void)serviceOperationDidBegin: (DEServiceOperation *)operation;
 
@@ -102,6 +108,9 @@ typedef id DEServiceRequest;
 
 - (void)serviceOperationFailed: (DEServiceOperation *)operation
     error: (NSError *)error;
+
+- (NSURLCredential *)credentialForServiceOperation: (DEServiceOperation *)operation
+    challenge: (NSURLAuthenticationChallenge *)challenge;
 
 - (id)serviceOperation: (DEServiceOperation *)operation
     transformData: (NSData *)data
