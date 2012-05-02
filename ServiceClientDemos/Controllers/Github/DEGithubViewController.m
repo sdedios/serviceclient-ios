@@ -207,6 +207,10 @@
 
 - (void)refreshRepos
 {
+    // show message
+    _messageLabel.text = @"Fetching repos...";
+    _messagePanel.hidden = NO;
+
     // request repos
     [_githubClient getReposWithCompletion:^(DEServiceResult result, 
         NSArray *repos) 
@@ -217,6 +221,9 @@
         
         // refresh table
         [_tableView reloadData];
+
+        // hide message
+        _messagePanel.hidden = YES;
     }];
 }
 
