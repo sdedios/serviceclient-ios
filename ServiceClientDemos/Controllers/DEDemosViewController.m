@@ -22,8 +22,11 @@
 #pragma mark Class Extension
 
 @interface DEDemosViewController ()
+{
+    @private __weak UITableView *_tableView;
+}
 
-@end
+@end  // @interface DEDemosViewController ()
 
 
 #pragma mark -
@@ -63,14 +66,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation)interfaceOrientation
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
-    {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } 
-    else 
-    {
-        return YES;
-    }
+    return YES;
 }
 
 

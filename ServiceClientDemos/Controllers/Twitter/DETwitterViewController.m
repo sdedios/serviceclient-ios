@@ -17,16 +17,14 @@
 #import "DETwitterViewController.h"
 
 
-#pragma mark Constants
-
-//static NSString * const SomeString = @"";
-//#define SomeContant 1.0
-
-
-#pragma mark -
-#pragma mark Internal Interface
+#pragma mark Class Extension
 
 @interface DETwitterViewController ()
+{
+    @private __weak UITableView *_tableView;
+    @private __weak UIView *_messagePanel;
+    @private __weak UILabel *_messageLabel;
+}
 
 @end  // @interface DETwitterViewController ()
 
@@ -41,6 +39,8 @@
 #pragma mark Properties
 
 @synthesize tableView = _tableView;
+@synthesize messagePanel = _messagePanel;
+@synthesize messageLabel = _messageLabel;
 
 
 #pragma mark -
@@ -70,14 +70,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation)interfaceOrientation
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
-    {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } 
-    else 
-    {
-        return YES;
-    }
+    return YES;
 }
 
 - (void)viewDidLoad 
@@ -87,6 +80,10 @@
 	
 	// set title
     self.title = @"Twitter Client";
+    
+    // show message
+    _messageLabel.text = @"Not yet implemented...";
+    _messagePanel.hidden = NO;
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -118,14 +115,14 @@
 - (NSInteger)tableView: (UITableView *)tableView 
     numberOfRowsInSection: (NSInteger)section
 {
-    return 3;
+    return 0;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView 
     cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
     // reuse cell if possible (or create one)
-    static NSString *cellIdentifier = @"link";
+    static NSString *cellIdentifier = @"tweet";
     UITableViewCell *cell = [tableView 
         dequeueReusableCellWithIdentifier: cellIdentifier];
     if (cell == nil)
@@ -134,22 +131,6 @@
             initWithStyle: UITableViewCellStyleDefault 
             reuseIdentifier: cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    // initialize cell
-    switch (indexPath.row)
-    {
-        case 0:
-            cell.textLabel.text = @"Twitter Client";
-            break;
-            
-        case 1:
-            cell.textLabel.text = @"QR Code Client";
-            break;
-            
-        case 2:
-            cell.textLabel.text = @"Random Client";
-            break;
     }
     
     // return cell

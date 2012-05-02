@@ -19,9 +19,6 @@
 @interface DEDemosViewController : UIViewController<
     UITableViewDelegate,
     UITableViewDataSource>
-{
-    @private __weak UITableView *_tableView;
-}
 
 #pragma mark -
 #pragma mark Properties

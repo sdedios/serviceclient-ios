@@ -19,14 +19,13 @@
 @interface DETwitterViewController : UIViewController<
     UITableViewDelegate,
     UITableViewDataSource>
-{
-    @private __weak UITableView *_tableView;
-}
 
 #pragma mark -
 #pragma mark Properties
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIView *messagePanel;
+@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
 
 @end  // @interface DETwitterViewController
