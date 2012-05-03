@@ -167,6 +167,12 @@ static NSString * const DEGithubReposPath = @"user/repos";
         context: nil];
 }
 
+- (void)logout
+{
+    self.accessToken = nil;
+    self.persistedToken = nil;
+}
+
 - (void)getReposWithCompletion: (void (^)(DEServiceResult, NSArray *))completion
 {
     // create request data

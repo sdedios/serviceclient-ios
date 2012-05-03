@@ -22,8 +22,6 @@
 @interface DETwitterViewController ()
 {
     @private __weak UITableView *_tableView;
-    @private __weak UIView *_messagePanel;
-    @private __weak UILabel *_messageLabel;
 }
 
 @end  // @interface DETwitterViewController ()
@@ -39,8 +37,6 @@
 #pragma mark Properties
 
 @synthesize tableView = _tableView;
-@synthesize messagePanel = _messagePanel;
-@synthesize messageLabel = _messageLabel;
 
 
 #pragma mark -
@@ -82,8 +78,8 @@
     self.title = @"Twitter Client";
     
     // show message
-    _messageLabel.text = @"Not yet implemented...";
-    _messagePanel.hidden = NO;
+    [self showErrorMessage: @"Not yet implemented..."
+        animated: YES];
 }
 
 - (void)viewWillAppear: (BOOL)animated

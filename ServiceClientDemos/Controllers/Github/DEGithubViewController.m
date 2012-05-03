@@ -23,12 +23,11 @@
 
 @interface DEGithubViewController ()
 {
+    @private __strong UIBarButtonItem *_logoutButton;
     @private __weak UITableView *_tableView;
     @private __weak UIView *_loginPanel;
     @private __weak UITextField *_usernameField;
     @private __weak UITextField *_passwordField;
-    @private __weak UIView *_messagePanel;
-    @private __weak UILabel *_messageLabel;
     @private __weak UITextField *_firstResponder;
     
     @private __strong DEGithubClient *_githubClient;
@@ -37,6 +36,8 @@
 
 #pragma mark -
 #pragma mark Methods
+
+- (void)logout;
 
 - (void)refreshRepos;
 
@@ -57,8 +58,6 @@
 @synthesize loginPanel = _loginPanel;
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
-@synthesize messagePanel = _messagePanel;
-@synthesize messageLabel = _messageLabel;
 
 
 #pragma mark -
@@ -75,6 +74,11 @@
     }
 	
 	// initialize instance variables
+    _logoutButton = [[UIBarButtonItem alloc]
+        initWithTitle: @"Logout" 
+        style: UIBarButtonItemStylePlain 
+        target: self 
+        action: @selector(logout)];
     _githubClient = [[DEGithubClient alloc]
         init];
     _repos = [[NSMutableArray alloc]
@@ -89,13 +93,13 @@
 - (IBAction)login
 {
     // show message
-    _messageLabel.text = @"Logging into Github...";
-    _messagePanel.hidden = NO;
+    [self showErrorMessage: @"Logging into Github..."
+        animated: YES];
     
     // TODO: validate crendentials
     NSString *username = _usernameField.text;
     NSString *password = _passwordField.text;
-    
+        
     // login with client
     [_githubClient loginWithUsername: username 
         password: password 
@@ -107,29 +111,31 @@
                 && statusFamily == 2)
             {
                 // hide message and login
-                _messagePanel.hidden = YES;
+                [self hideMessage: YES];
                 _loginPanel.hidden = YES;
                 
+                // reset password
+                _passwordField.text = nil;
+
+                // show logout button
+                self.navigationItem.rightBarButtonItem = _logoutButton;
+
                 // load repos
                 [self refreshRepos];
-            }
-            
-            // github uses 400-series for invalid creds
-            else if (statusFamily == 4)
-            {
-                _messageLabel.text = @"Invalid username or password.";
             }
             
             // handle service unavailable
             else if (statusFamily == 5)
             {
-                _messageLabel.text = @"The server is currently unavailable, please try again later.";
+                [self showErrorMessage: @"The server is currently unavailable, please try again later."
+                    animated: YES];
             }
             
-            // handle unexpected error
+            // otherwise, assume invalid creds (the error 
             else 
             {
-                _messageLabel.text = @"An unexpected error occurred.";
+                [self showErrorMessage: @"Invalid username or password."
+                    animated: YES];
             }
         }];
 }
@@ -167,8 +173,12 @@
     
     // otherwise, load repos
     else 
-    {
-       [self refreshRepos];
+    {        
+        // show logout button
+        self.navigationItem.rightBarButtonItem = _logoutButton;
+        
+        // load repos
+        [self refreshRepos];
     }
 }
 
@@ -198,11 +208,25 @@
 #pragma mark -
 #pragma mark Private Methods
 
+- (void)logout
+{
+    // reset github access token
+    [_githubClient logout];
+    
+    // reset table data
+    [_repos removeAllObjects];
+    [_tableView reloadData];
+    
+    // show login
+    _loginPanel.hidden = NO;
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
 - (void)refreshRepos
 {
     // show message
-    _messageLabel.text = @"Fetching repos...";
-    _messagePanel.hidden = NO;
+    [self showProgressMessage: @"Fetching repos..."
+        animated: YES];
 
     // request repos
     [_githubClient getReposWithCompletion:^(DEServiceResult result, 
@@ -216,7 +240,7 @@
         [_tableView reloadData];
 
         // hide message
-        _messagePanel.hidden = YES;
+        [self hideMessage: YES];
     }];
 }
 

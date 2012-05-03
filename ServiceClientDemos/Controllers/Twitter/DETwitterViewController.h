@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+  
+#import "DEDemoViewController.h"
+
+
 #pragma mark Class Declaration
  
-@interface DETwitterViewController : UIViewController<
+@interface DETwitterViewController : DEDemoViewController<
     UITableViewDelegate,
     UITableViewDataSource>
 
@@ -24,8 +27,6 @@
 #pragma mark Properties
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIView *messagePanel;
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
 
 @end  // @interface DETwitterViewController

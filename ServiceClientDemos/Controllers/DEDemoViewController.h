@@ -13,29 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#import "DEServiceClient.h"
- 
  
 #pragma mark Class Declaration
  
-@interface DEGithubClient : DEServiceClient
+@interface DEDemoViewController : UIViewController
 
 #pragma mark -
 #pragma mark Properties
 
-@property (nonatomic, copy) NSString *accessToken;
+@property (nonatomic, weak) IBOutlet UIView *messagePanel;
+@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *messageIndicator;
 
 
 #pragma mark -
 #pragma mark Methods
 
-- (void)loginWithUsername: (NSString *)username
-    password: (NSString *)password
-    completion: (void (^)(DEServiceResult result, NSInteger statusCode))completion;
-    
-- (void)logout;
+- (IBAction)dismissErrorMessage;
 
-- (void)getReposWithCompletion: (void (^)(DEServiceResult result, NSArray *repos))completion;
+- (void)showProgressMessage: (NSString *)message
+    animated: (BOOL)animated;
 
-@end  // @interface DEGithubClient
+- (void)showErrorMessage: (NSString *)message
+    animated: (BOOL)animated;
+
+- (void)showErrorMessage:(NSString *)message
+    withDetails: (NSString *)messageDetails
+    animated: (BOOL)animated;
+
+- (void)hideMessage: (BOOL)animated;
+
+
+@end  // @interface DEDemoViewController

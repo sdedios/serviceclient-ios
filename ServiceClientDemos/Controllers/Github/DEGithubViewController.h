@@ -14,9 +14,12 @@
  * limitations under the License.
  */
  
+#import "DEDemoViewController.h"
+
+ 
 #pragma mark Class Declaration
  
-@interface DEGithubViewController : UIViewController<
+@interface DEGithubViewController : DEDemoViewController<
     UITableViewDelegate,
     UITableViewDataSource,
     UITextFieldDelegate>
@@ -28,8 +31,6 @@
 @property (nonatomic, weak) IBOutlet UIView *loginPanel;
 @property (nonatomic, weak) IBOutlet UITextField *usernameField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordField;
-@property (nonatomic, weak) IBOutlet UIView *messagePanel;
-@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
 
 #pragma mark -

@@ -33,6 +33,7 @@
 		FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB66EBF01540EF5D00479972 /* AppDelegate.m */; };
 		FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB78153C1548E1A300D8176A /* DEGithubClient.m */; };
 		FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */; };
+		FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08C11550D14200428C89 /* DEDemoViewController.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,8 @@
 		FB78153C1548E1A300D8176A /* DEGithubClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubClient.m; sourceTree = "<group>"; };
 		FB7C08BC1550CAC400428C89 /* DEGithubRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubRepo.h; sourceTree = "<group>"; };
 		FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubRepo.m; sourceTree = "<group>"; };
+		FB7C08C01550D14200428C89 /* DEDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEDemoViewController.h; sourceTree = "<group>"; };
+		FB7C08C11550D14200428C89 /* DEDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEDemoViewController.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +208,8 @@
 				FB478BF21541FD6200EA06F4 /* Twitter */,
 				FB478BE21541E90400EA06F4 /* DEDemosViewController.h */,
 				FB478BE31541E90400EA06F4 /* DEDemosViewController.m */,
+				FB7C08C01550D14200428C89 /* DEDemoViewController.h */,
+				FB7C08C11550D14200428C89 /* DEDemoViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */,
 				FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */,
 				FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */,
+				FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
