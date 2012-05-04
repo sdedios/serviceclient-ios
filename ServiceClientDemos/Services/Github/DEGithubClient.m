@@ -16,6 +16,7 @@
  
 #import "DEGithubClient.h"
 #import "DEGithubRepo.h"
+#import "DENetworkIndicatorHelper.h"
 
 
 #pragma mark Constants
@@ -40,6 +41,14 @@ static NSString * const DEGithubReposPath = @"user/repos";
 #pragma mark Properties
 
 @property (nonatomic, strong) NSString *persistedToken;
+
+
+#pragma mark -
+#pragma mark Methods
+
+- (void)createAuthorization: (NSString *)authorizationId
+    headers: (NSDictionary *)headers
+    completion: (void (^)(DEServiceResult, NSInteger))completion;
 
 
 @end  // @interface DEGithubClient ()
@@ -104,18 +113,6 @@ static NSString * const DEGithubReposPath = @"user/repos";
     self.accessToken = nil;
 
     // create request data
-    NSArray *scopes = [[NSArray alloc]
-        initWithObjects:
-            @"repo",
-            nil];
-    NSDictionary *body = [[NSDictionary alloc]
-        initWithObjectsAndKeys:
-            scopes, @"scopes",
-            @"DEServiceClient demo app", @"note",
-            nil];            
-    NSData *bodyData = [NSJSONSerialization dataWithJSONObject: body 
-        options: 0 
-        error: NULL];
     NSDictionary *headers = [[NSDictionary alloc]
         initWithObjectsAndKeys:
             [NSString stringWithFormat: @"Basic %@",
@@ -126,19 +123,31 @@ static NSString * const DEGithubReposPath = @"user/repos";
             @"application/json", @"Accept",
             nil];
             
-    // send request
+    // send request to enumerate existing authorizations
+    NSString *authorizationId = [NSString 
+        stringWithFormat: @"http://dedios.org/%@",
+            [NSBundle mainBundle].bundleIdentifier];
     NSString *endpoint = [[NSString alloc]
         initWithFormat: @"%@/%@", DEGithubUri, DEGithubAuthorizePath];
     [self beginRequestAsync: endpoint
-        method: DEServiceMethodPost 
+        method: DEServiceMethodGet
         headers: headers 
         parameters: nil 
-        bodyData: bodyData
+        bodyData: nil
         format: DEServiceFormatJson 
         transform: ^id(NSHTTPURLResponse *response, id data) 
         {
-            // extract token
-            NSString *accessToken = [data objectForKey: @"token"];
+            // find access token for authorization matching bundle
+            NSString *accessToken = nil;
+            for (NSDictionary *authorization in data) 
+            {
+                NSString *noteUrl = [authorization objectForKey: @"note_url"];
+                if ([noteUrl isEqualToString: authorizationId] == YES)
+                {
+                    accessToken = [authorization objectForKey: @"token"];
+                    break;
+                }
+            }
             
             // return token
             return accessToken;
@@ -146,22 +155,29 @@ static NSString * const DEGithubReposPath = @"user/repos";
         completion: ^(DEServiceResult result, NSHTTPURLResponse *response, 
             id accessToken) 
         {
-            // set token on success
-            NSInteger statusCode = response.statusCode;
-            if (result == DEServiceResultSuccess
-                && (statusCode / 100) == 2)
+            // handle success
+            if (accessToken != nil
+                && [[NSNull null] isEqual: accessToken] == NO)
             {
                 // persist token locally
                 self.accessToken = accessToken;
                 
                 // persist token
                 self.persistedToken = accessToken;
+            
+                // callback completion (if any)
+                if (completion != nil)
+                {
+                    completion(result, response.statusCode);
+                }
             }
             
-            // callback completion (if any)
-            if (completion != nil)
+            // or try to create token
+            else 
             {
-                completion(result, statusCode);
+                [self createAuthorization: authorizationId 
+                    headers: headers 
+                    completion: completion];
             }
         }         
         context: nil];
@@ -173,7 +189,7 @@ static NSString * const DEGithubReposPath = @"user/repos";
     self.persistedToken = nil;
 }
 
-- (void)getReposWithCompletion: (void (^)(DEServiceResult, NSArray *))completion
+- (void)getReposWithCompletion: (void (^)(DEServiceResult, NSInteger, NSArray *))completion
 {
     // create request data
     NSDictionary *parameters = [[NSDictionary alloc]
@@ -224,7 +240,7 @@ static NSString * const DEGithubReposPath = @"user/repos";
             // callback completion (if any)
             if (completion != nil)
             {
-                completion(result, repos);
+                completion(result, response.statusCode, repos);
             }
         }         
         context: nil];
@@ -233,6 +249,80 @@ static NSString * const DEGithubReposPath = @"user/repos";
 
 #pragma mark -
 #pragma mark Overridden Methods
+
+- (void)serviceOperationDidBegin: (DEServiceOperation *)operation
+{
+    [DENetworkIndicatorHelper networkOperationBegin];
+}
+
+- (void)serviceOperationDidEnd: (DEServiceOperation *)operation
+{
+    [DENetworkIndicatorHelper networkOperationEnd];
+}
+
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)createAuthorization: (NSString *)authorizationId
+    headers: (NSDictionary *)headers
+    completion: (void (^)(DEServiceResult, NSInteger))completion
+{
+    // create request data
+    NSArray *scopes = [[NSArray alloc]
+        initWithObjects:
+            @"repo",
+            nil];
+    NSDictionary *body = [[NSDictionary alloc]
+        initWithObjectsAndKeys:
+            scopes, @"scopes",
+            @"DEServiceClient demo app", @"note",
+            authorizationId, @"note_url",
+            nil];            
+    NSData *bodyData = [NSJSONSerialization dataWithJSONObject: body 
+        options: 0 
+        error: NULL];
+        
+    // send request to enumerate existing authorizations
+    NSString *endpoint = [[NSString alloc]
+        initWithFormat: @"%@/%@", DEGithubUri, DEGithubAuthorizePath];
+    [self beginRequestAsync: endpoint
+        method: DEServiceMethodPost 
+        headers: headers 
+        parameters: nil 
+        bodyData: bodyData
+        format: DEServiceFormatJson 
+        transform: ^id(NSHTTPURLResponse *response, id data) 
+        {
+            // extract token
+            NSString *accessToken = [data objectForKey: @"token"];
+            
+            // return token
+            return accessToken;
+        } 
+        completion: ^(DEServiceResult result, NSHTTPURLResponse *response, 
+            id accessToken) 
+        {
+            // set token on success
+            NSInteger statusCode = response.statusCode;
+            if (result == DEServiceResultSuccess
+                && (statusCode / 100) == 2)
+            {
+                // persist token locally
+                self.accessToken = accessToken;
+                
+                // persist token
+                self.persistedToken = accessToken;
+            }
+            
+            // callback completion (if any)
+            if (completion != nil)
+            {
+                completion(result, statusCode);
+            }
+        }         
+        context: nil];
+}
 
 
 @end  // @interface DEGithubClient

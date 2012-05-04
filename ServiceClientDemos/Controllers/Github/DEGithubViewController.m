@@ -230,17 +230,41 @@
 
     // request repos
     [_githubClient getReposWithCompletion:^(DEServiceResult result, 
-        NSArray *repos) 
+        NSInteger statusCode, NSArray *repos) 
     {
-        // repopulate repos
-        [_repos removeAllObjects];
-        [_repos addObjectsFromArray: repos];
-        
-        // refresh table
-        [_tableView reloadData];
+        // handle success
+        NSInteger statusFamily = statusCode / 100;
+        if (statusFamily == 2)
+        {
+            // repopulate repos
+            [_repos removeAllObjects];
+            [_repos addObjectsFromArray: repos];
+            
+            // refresh table
+            [_tableView reloadData];
 
-        // hide message
-        [self hideMessage: YES];
+            
+            // hide message
+            [self hideMessage: YES];
+        }
+        
+        // or display server error
+        else if (statusFamily == 5)
+        {
+            [self showErrorMessage: @"The server is unavailable, please try again later..." 
+                animated: YES];
+        }
+        
+        // assume anything else means logged out
+        else 
+        {
+            // logout
+            [self logout];
+            
+            // show error
+            [self showErrorMessage: @"Access token expired or revoked" 
+                animated: YES];
+        }
     }];
 }
 

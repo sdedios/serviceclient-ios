@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-#import "DEServiceClient.h"
- 
- 
-#pragma mark Class Declaration
- 
-@interface DEGithubClient : DEServiceClient
+#pragma mark Class Interface
 
-#pragma mark -
-#pragma mark Properties
-
-@property (nonatomic, copy) NSString *accessToken;
-
+@interface DENetworkIndicatorHelper : NSObject
 
 #pragma mark -
 #pragma mark Methods
 
-- (void)loginWithUsername: (NSString *)username
-    password: (NSString *)password
-    completion: (void (^)(DEServiceResult result, NSInteger statusCode))completion;
-    
-- (void)logout;
++ (void)networkOperationBegin;
 
-- (void)getReposWithCompletion: (void (^)(DEServiceResult result, NSInteger statusCode, NSArray *repos))completion;
++ (void)networkOperationEnd;
 
-@end  // @interface DEGithubClient
+
+@end  // @interface DENetworkIndicatorHelper

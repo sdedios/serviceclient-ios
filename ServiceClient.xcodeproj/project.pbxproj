@@ -36,6 +36,7 @@
 		FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08C11550D14200428C89 /* DEDemoViewController.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
+		FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		FB7C08C11550D14200428C89 /* DEDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEDemoViewController.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
+		FBF30A2615537D0600C94946 /* DENetworkIndicatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DENetworkIndicatorHelper.h; sourceTree = "<group>"; };
+		FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DENetworkIndicatorHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				FB7815391548E16B00D8176A /* Github */,
+				FBF30A2615537D0600C94946 /* DENetworkIndicatorHelper.h */,
+				FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */,
 				FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */,
 				FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */,
+				FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

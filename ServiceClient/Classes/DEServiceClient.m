@@ -253,9 +253,6 @@
     return operation;
 }
 
-#pragma mark -
-#pragma mark DEServiceClientOperationDelegate Methdos
-
 - (void)serviceOperationDidBegin: (DEServiceOperation *)operation
 {
 }
