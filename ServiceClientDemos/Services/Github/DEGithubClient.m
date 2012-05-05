@@ -129,7 +129,7 @@ static NSString * const DEGithubReposPath = @"user/repos";
             [NSBundle mainBundle].bundleIdentifier];
     NSString *endpoint = [[NSString alloc]
         initWithFormat: @"%@/%@", DEGithubUri, DEGithubAuthorizePath];
-    [self beginRequestAsync: endpoint
+    [self beginRequestWithURL: endpoint
         method: DEServiceMethodGet
         headers: headers 
         parameters: nil 
@@ -205,7 +205,7 @@ static NSString * const DEGithubReposPath = @"user/repos";
     // send request
     NSString *endpoint = [[NSString alloc]
         initWithFormat: @"%@/%@", DEGithubUri, DEGithubReposPath];
-    [self beginRequestAsync: endpoint
+    [self beginRequestWithURL: endpoint
         method: DEServiceMethodGet 
         headers: headers 
         parameters: parameters 
@@ -286,7 +286,7 @@ static NSString * const DEGithubReposPath = @"user/repos";
     // send request to enumerate existing authorizations
     NSString *endpoint = [[NSString alloc]
         initWithFormat: @"%@/%@", DEGithubUri, DEGithubAuthorizePath];
-    [self beginRequestAsync: endpoint
+    [self beginRequestWithURL: endpoint
         method: DEServiceMethodPost 
         headers: headers 
         parameters: nil 

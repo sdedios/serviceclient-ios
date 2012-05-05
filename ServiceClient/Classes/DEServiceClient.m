@@ -78,7 +78,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (DEServiceOperation *)beginRequestAsync: (NSString *)uri
+- (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
     method: (DEServiceMethod)method
     headers: (NSDictionary *)headers
     parameters: (NSDictionary *)parameters    
@@ -88,7 +88,7 @@
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     context: (id)context
 {
-    return [self beginRequestAsync: uri 
+    return [self beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
@@ -102,7 +102,7 @@
         context: context];
 }
 
-- (DEServiceOperation *)beginRequestAsync: (NSString *)uri
+- (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
     method: (DEServiceMethod)method
     headers: (NSDictionary *)headers
     parameters: (NSDictionary *)parameters    
@@ -124,7 +124,7 @@
     }
 
     // make request
-    return [self beginRequestAsync: uri 
+    return [self beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
@@ -138,7 +138,25 @@
         context: context];
 }
 
-- (DEServiceOperation *)beginRequestAsync: (NSString *)uri
+- (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
+    method: (DEServiceMethod)method
+    headers: (NSDictionary *)headers
+    parameters: (NSDictionary *)parameters    
+    parts: (DEMultipartCollection *)parts
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context
+{
+    [NSException raise: @"NotImplemented" 
+        format: @"This method is a placeholder"];
+    return nil;
+}
+
+- (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
     method: (DEServiceMethod)method
     headers: (NSDictionary *)headers
     parameters: (NSDictionary *)parameters    
@@ -148,7 +166,7 @@
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     context: (id)context
 {
-    return [self beginRequestAsync: uri 
+    return [self beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
@@ -162,7 +180,7 @@
         context: context];
 }
 
-- (DEServiceOperation *)beginRequestAsync: (NSString *)uri
+- (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
     method: (DEServiceMethod)method
     headers: (NSDictionary *)headers
     parameters: (NSDictionary *)parameters    
@@ -219,7 +237,7 @@
     }
 
     // process request
-    return [self beginURLRequestAsync: request 
+    return [self beginRequest: request 
         format: format 
         transform: transform 
         completion: completion 
@@ -228,7 +246,7 @@
         context: context];
 }
 
-- (DEServiceOperation *)beginURLRequestAsync: (NSURLRequest *)request
+- (DEServiceOperation *)beginRequest: (NSURLRequest *)request
     format: (DEServiceFormat)format
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion

@@ -34,6 +34,10 @@
 		FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB78153C1548E1A300D8176A /* DEGithubClient.m */; };
 		FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */; };
 		FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7C08C11550D14200428C89 /* DEDemoViewController.m */; };
+		FBB1889E1554A2E400C31372 /* DEMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB1889D1554A2E400C31372 /* DEMultipart.h */; };
+		FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */; };
+		FBB188A21554A41A00C31372 /* DEMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A11554A41A00C31372 /* DEMultipart.m */; };
+		FBB188A41554A46300C31372 /* DEMultipartCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A31554A46300C31372 /* DEMultipartCollection.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 		FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */; };
@@ -96,6 +100,10 @@
 		FB7C08BD1550CAC400428C89 /* DEGithubRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubRepo.m; sourceTree = "<group>"; };
 		FB7C08C01550D14200428C89 /* DEDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEDemoViewController.h; sourceTree = "<group>"; };
 		FB7C08C11550D14200428C89 /* DEDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEDemoViewController.m; sourceTree = "<group>"; };
+		FBB1889D1554A2E400C31372 /* DEMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipart.h; sourceTree = "<group>"; };
+		FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipartCollection.h; sourceTree = "<group>"; };
+		FBB188A11554A41A00C31372 /* DEMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipart.m; sourceTree = "<group>"; };
+		FBB188A31554A46300C31372 /* DEMultipartCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipartCollection.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 		FBF30A2615537D0600C94946 /* DENetworkIndicatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DENetworkIndicatorHelper.h; sourceTree = "<group>"; };
@@ -259,6 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */,
+				FBB188A11554A41A00C31372 /* DEMultipart.m */,
+				FBB188A31554A46300C31372 /* DEMultipartCollection.m */,
 				FB64C11D153900F40010136A /* DEServiceClient.m */,
 				FBE89462153CB30200FB01BD /* DEServiceHelper.m */,
 				FB64C125153910250010136A /* DEServiceOperation.m */,
@@ -271,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				FB64C123153905E50010136A /* DEServiceClientDefines.h */,
+				FBB1889D1554A2E400C31372 /* DEMultipart.h */,
+				FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */,
 				FB64C11F153900F40010136A /* DEServiceClient.h */,
 				FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */,
 				FB66EB70153F425400479972 /* DEServiceOperation.h */,
@@ -323,6 +335,8 @@
 				FB64C124153905E50010136A /* DEServiceClientDefines.h in Headers */,
 				FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */,
 				FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */,
+				FBB1889E1554A2E400C31372 /* DEMultipart.h in Headers */,
+				FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +486,8 @@
 				FB64C126153910250010136A /* DEServiceOperation.m in Sources */,
 				FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */,
 				FB66EB771540CD7D00479972 /* DEServiceClientDefines.m in Sources */,
+				FBB188A21554A41A00C31372 /* DEMultipart.m in Sources */,
+				FBB188A41554A46300C31372 /* DEMultipartCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
