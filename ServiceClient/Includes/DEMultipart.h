@@ -38,6 +38,10 @@
     name: (NSString *)name
     contentType: (NSString *)contentType;
 
+- (id)initWithContentsOfFile: (NSString *)path
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
 - (id)initWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
     contentType: (NSString *)contentType;
@@ -50,6 +54,10 @@
     contentType: (NSString *)contentType;
 
 + (DEMultipart *)multipartWithData: (NSData *)data
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
++ (DEMultipart *)multipartWithContentsOfFile: (NSString *)path
     name: (NSString *)name
     contentType: (NSString *)contentType;
 

@@ -71,6 +71,21 @@
         contentType: [contentType copy]];
 }
 
+- (id)initWithContentsOfFile: (NSString *)path
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    NSString *providerDataPath = [path copy];
+    return [self initWithDataProvider: ^NSData *
+        {
+            NSData *providerData = [NSData 
+                dataWithContentsOfFile: providerDataPath];
+            return providerData;
+        } 
+        name: [name copy] 
+        contentType: [contentType copy]];
+}
+
 - (id)initWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
     contentType: (NSString *)contentType
@@ -111,6 +126,17 @@
 {
     DEMultipart *multipart = [[DEMultipart alloc]
         initWithData: data
+        name: name 
+        contentType: contentType];
+    return multipart;
+}
+
++ (DEMultipart *)multipartWithContentsOfFile: (NSString *)path
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    DEMultipart *multipart = [[DEMultipart alloc]
+        initWithContentsOfFile: path
         name: name 
         contentType: contentType];
     return multipart;
