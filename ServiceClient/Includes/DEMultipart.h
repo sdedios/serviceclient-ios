@@ -22,5 +22,40 @@
 #pragma mark -
 #pragma mark Properties
 
+@property (nonatomic, readonly) NSString *name;
+
+@property (nonatomic, readonly) NSString *contentType;
+
+
+#pragma mark -
+#pragma mark Constructors
+
+- (id)initWithString: (NSString *)string
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
+- (id)initWithData: (NSData *)data
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
+- (id)initWithDataProvider: (NSData *(^)())dataProvider
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
+#pragma mark -
+#pragma mark Static Methods
+
++ (DEMultipart *)multipartWithString: (NSString *)string
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
++ (DEMultipart *)multipartWithData: (NSData *)data
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
++ (DEMultipart *)multipartWithDataProvider: (NSData *(^)())dataProvider
+    name: (NSString *)name
+    contentType: (NSString *)contentType;
+
 
 @end  // @interface DEMultipart

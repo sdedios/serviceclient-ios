@@ -38,6 +38,7 @@
 		FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */; };
 		FBB188A21554A41A00C31372 /* DEMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A11554A41A00C31372 /* DEMultipart.m */; };
 		FBB188A41554A46300C31372 /* DEMultipartCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A31554A46300C31372 /* DEMultipartCollection.m */; };
+		FBB188A61554C02500C31372 /* DEMultipart_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB188A51554C02500C31372 /* DEMultipart_Internal.h */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 		FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */; };
@@ -104,6 +105,7 @@
 		FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipartCollection.h; sourceTree = "<group>"; };
 		FBB188A11554A41A00C31372 /* DEMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipart.m; sourceTree = "<group>"; };
 		FBB188A31554A46300C31372 /* DEMultipartCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipartCollection.m; sourceTree = "<group>"; };
+		FBB188A51554C02500C31372 /* DEMultipart_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipart_Internal.h; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 		FBF30A2615537D0600C94946 /* DENetworkIndicatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DENetworkIndicatorHelper.h; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			children = (
 				FB66EB761540CD7D00479972 /* DEServiceClientDefines.m */,
 				FBB188A11554A41A00C31372 /* DEMultipart.m */,
+				FBB188A51554C02500C31372 /* DEMultipart_Internal.h */,
 				FBB188A31554A46300C31372 /* DEMultipartCollection.m */,
 				FB64C11D153900F40010136A /* DEServiceClient.m */,
 				FBE89462153CB30200FB01BD /* DEServiceHelper.m */,
@@ -337,6 +340,7 @@
 				FB66EB71153F425400479972 /* DEServiceOperation.h in Headers */,
 				FBB1889E1554A2E400C31372 /* DEMultipart.h in Headers */,
 				FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */,
+				FBB188A61554C02500C31372 /* DEMultipart_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

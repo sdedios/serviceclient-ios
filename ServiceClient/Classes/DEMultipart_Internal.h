@@ -14,25 +14,14 @@
  * limitations under the License.
  */
 
-#import "DEMultipartCollection.h"
-#import "DEMultipart_Internal.h"
+#pragma mark Class Extension
 
-
-#pragma mark Class Variables
-
+@interface DEMultipart()
 
 #pragma mark -
-#pragma mark Class Definition
+#pragma mark Methods
 
-@implementation DEMultipartCollection
-
-
-#pragma mark -
-#pragma mark Constructors
+- (NSData *)data;
 
 
-#pragma mark -
-#pragma mark Public Methods
-
-
-@end  // @implementation DEMultipartCollection
+@end  // @interface DEMultipart()

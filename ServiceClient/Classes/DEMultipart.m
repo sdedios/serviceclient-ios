@@ -15,9 +15,18 @@
  */
 
 #import "DEMultipart.h"
+#import "DEMultipart_Internal.h"
 
 
-#pragma mark Class Variables
+#pragma mark Class Extension
+
+@interface DEMultipart()
+{
+    @private __strong NSString *_name;
+    @private __strong NSString *_contentType;
+    @private NSData * (__strong ^_dataProvider)();
+}
+@end  // @interface DEMultipart()
 
 
 #pragma mark -
@@ -27,11 +36,107 @@
 
 
 #pragma mark -
+#pragma mark Properties
+
+@synthesize name = _name;
+@synthesize contentType = _contentType;
+
+
+#pragma mark -
 #pragma mark Constructors
+
+- (id)initWithString: (NSString *)string
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    NSData *providerData = [string dataUsingEncoding: NSUTF8StringEncoding];
+    return [self initWithDataProvider: ^NSData *
+        {
+            return providerData;
+        } 
+        name: [name copy] 
+        contentType: [contentType copy]];
+}
+
+- (id)initWithData: (NSData *)data
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    NSData *providerData = [data copy];
+    return [self initWithDataProvider: ^NSData *
+        {
+            return providerData;
+        } 
+        name: [name copy] 
+        contentType: [contentType copy]];
+}
+
+- (id)initWithDataProvider: (NSData *(^)())dataProvider
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    // abort if allocation fails
+    if ((self = [super init]) == nil)
+    {
+        return nil;
+    }
+    
+    // initialize instance variables
+    _name = name;
+    _contentType = contentType;
+    _dataProvider = [dataProvider copy];
+    
+    // return instance
+    return self;
+}
 
 
 #pragma mark -
 #pragma mark Public Methods
+
++ (DEMultipart *)multipartWithString: (NSString *)string
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    DEMultipart *multipart = [[DEMultipart alloc]
+        initWithString: string 
+        name: name 
+        contentType: contentType];
+    return multipart;
+}
+
++ (DEMultipart *)multipartWithData: (NSData *)data
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    DEMultipart *multipart = [[DEMultipart alloc]
+        initWithData: data
+        name: name 
+        contentType: contentType];
+    return multipart;
+}
+
++ (DEMultipart *)multipartWithDataProvider: (NSData *(^)())dataProvider
+    name: (NSString *)name
+    contentType: (NSString *)contentType
+{
+    DEMultipart *multipart = [[DEMultipart alloc]
+        initWithDataProvider: dataProvider
+        name: name 
+        contentType: contentType];
+    return multipart;
+}
+
+
+#pragma mark -
+#pragma mark Internal Methods
+
+- (NSData *)data
+{
+    return _dataProvider == nil
+        ? nil
+        : _dataProvider();
+}
 
 
 @end  // @implementation DEMultipart
