@@ -15,10 +15,24 @@
  */
 
 #import "DEMultipartCollection.h"
+#import "DEMultipartCollection_Internal.h"
 #import "DEMultipart_Internal.h"
 
 
-#pragma mark Class Variables
+#pragma mark Constants
+
+NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
+
+
+#pragma mark -
+#pragma mark Class Extension
+
+@interface DEMultipartCollection()
+{
+    @private __strong NSArray *_parts;
+    @private __strong NSString *_partDelimiter;
+}
+@end  // @interface DEMultipartCollection()
 
 
 #pragma mark -
@@ -28,11 +42,59 @@
 
 
 #pragma mark -
-#pragma mark Constructors
+#pragma mark Properties
+
+@synthesize parts = _parts;
+@synthesize partDelimiter = _partDelimiter;
 
 
 #pragma mark -
-#pragma mark Public Methods
+#pragma mark Constructors
+
+- (id)initWithParts: (DEMultipart *)firstPart, ... 
+{
+    // convert variable args to part array
+    NSMutableArray *parts = [[NSMutableArray alloc]
+        initWithCapacity: 4];
+    va_list args;
+    va_start(args, firstPart);
+    for (DEMultipart *part = firstPart; part != nil; 
+        part = va_arg(args, DEMultipart *))
+    {
+        [parts addObject: part];
+    }
+    va_end(args);
+
+    // forward construction
+    return [self initWithPartArray: parts];
+}
+
+- (id)initWithPartArray: (NSArray *)parts
+{
+    // abort if allocation fails
+    if ((self = [super init]) == nil)
+    {
+        return nil;
+    }
+    
+    // initialize instance variables
+    _parts = parts;
+    _partDelimiter = DEMultipartDelimiterDefault;
+    
+    // return instance
+    return self;
+}
+
+
+#pragma mark -
+#pragma mark Internal Methods
+
+- (NSData *)data
+{
+    [NSException raise: @"NotImplemented" 
+        format: @"The MultipartCollection is not yet complete"];
+    return nil;
+}
 
 
 @end  // @implementation DEMultipartCollection

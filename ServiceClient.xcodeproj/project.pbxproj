@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FB011D4B154F288D00A397EE /* libserviceclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2321538FDB5002B7B71 /* libserviceclient.a */; };
+		FB06C4A215573EE900EA3441 /* DEMultipartCollection_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB06C4A115573EE900EA3441 /* DEMultipartCollection_Internal.h */; };
 		FB2EB2361538FDB5002B7B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
 		FB2EB2441538FDB5002B7B71 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2431538FDB5002B7B71 /* SenTestingKit.framework */; };
 		FB2EB2471538FDB5002B7B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2EB2351538FDB5002B7B71 /* Foundation.framework */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FB06C4A115573EE900EA3441 /* DEMultipartCollection_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipartCollection_Internal.h; sourceTree = "<group>"; };
 		FB2EB2321538FDB5002B7B71 /* libserviceclient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libserviceclient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2EB2351538FDB5002B7B71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB2EB2391538FDB5002B7B71 /* ServiceClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ServiceClient-Prefix.pch"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				FBB188A11554A41A00C31372 /* DEMultipart.m */,
 				FBB188A51554C02500C31372 /* DEMultipart_Internal.h */,
 				FBB188A31554A46300C31372 /* DEMultipartCollection.m */,
+				FB06C4A115573EE900EA3441 /* DEMultipartCollection_Internal.h */,
 				FB64C11D153900F40010136A /* DEServiceClient.m */,
 				FBE89462153CB30200FB01BD /* DEServiceHelper.m */,
 				FB64C125153910250010136A /* DEServiceOperation.m */,
@@ -341,6 +344,7 @@
 				FBB1889E1554A2E400C31372 /* DEMultipart.h in Headers */,
 				FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */,
 				FBB188A61554C02500C31372 /* DEMultipart_Internal.h in Headers */,
+				FB06C4A215573EE900EA3441 /* DEMultipartCollection_Internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

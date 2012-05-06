@@ -14,34 +14,14 @@
  * limitations under the License.
  */
 
-#import "DEMultipart.h"
+#pragma mark Class Extension
 
-
-#pragma mark Constants
-
-NSString * const DEMultipartDelimiterDefault;
-
+@interface DEMultipartCollection()
 
 #pragma mark -
-#pragma mark Class Interface
+#pragma mark Methods
 
-@interface DEMultipartCollection : NSObject
-
-
-#pragma mark -
-#pragma mark Constructors
-
-- (id)initWithParts: (DEMultipart *)firstPart, ... NS_REQUIRES_NIL_TERMINATION;
-
-- (id)initWithPartArray: (NSArray *)parts;
+- (NSData *)data;
 
 
-#pragma mark -
-#pragma mark Properties
-
-@property (nonatomic, readonly) NSArray *parts;
-
-@property (nonatomic, copy) NSString *partDelimiter;
-
-
-@end  // @interface DEMultipartCollection
+@end  // @interface DEMultipartCollection()

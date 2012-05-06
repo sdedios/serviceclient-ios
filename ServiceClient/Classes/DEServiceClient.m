@@ -16,12 +16,9 @@
 
 #import "DEServiceClient.h"
 #import "DEServiceOperation_Internal.h"
+#import "DEMultipartCollection_Internal.h"
 
 
-#pragma mark Constants
-
-
-#pragma mark -
 #pragma mark Class Extension
 
 @interface DEServiceClient()
@@ -151,9 +148,22 @@
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
     context: (id)context
 {
-    [NSException raise: @"NotImplemented" 
-        format: @"This method is a placeholder"];
-    return nil;
+	// encode body data, if provided
+	NSData *bodyData = [parts data];
+	
+    // make request
+    return [self beginRequestWithURL: uri 
+        method: method 
+        headers: headers 
+        parameters: parameters 
+        bodyData: bodyData
+        format: format 
+        transform: transform 
+        completion: completion
+        queuePriority: queuePriority 
+        dispatchPriority: dispatchPriority 
+        cachePolicy: cachePolicy
+        context: context];
 }
 
 - (DEServiceOperation *)beginRequestWithURL: (NSString *)uri
