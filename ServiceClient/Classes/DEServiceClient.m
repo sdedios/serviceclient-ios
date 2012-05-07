@@ -26,6 +26,24 @@
     @private __strong NSOperationQueue *_requestQueue;
     @private NSTimeInterval _requestTimeout;
 }
+
+
+#pragma mark -
+#pragma mark Methods
+
+- (DEServiceOperation *)_beginRequestWithURL: (NSString *)uri
+    method: (DEServiceMethod)method
+    headers: (NSDictionary *)headers
+    parameters: (NSDictionary *)parameters    
+    bodyDataProvider: (NSData * (^)(DEServiceOperation *operation))dataProvider
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context;
+
 @end  // @interface DEServiceClient()
 
 
@@ -112,20 +130,23 @@
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
     context: (id)context
 {
-	// encode body data, if provided
-	NSData *bodyData = nil;
-	if (body != nil
-        && [[NSNull null] isEqual: body] == NO)
-    {
-        bodyData = [body dataUsingEncoding: NSUTF8StringEncoding];
-    }
-
-    // make request
-    return [self beginRequestWithURL: uri 
+    return [self _beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
-        bodyData: bodyData
+        bodyDataProvider: ^NSData * (DEServiceOperation *operation)
+            {
+                // encode body data
+                NSData *bodyData = nil;
+                if (body != nil
+                    && [[NSNull null] isEqual: body] == NO)
+                {
+                    bodyData = [body dataUsingEncoding: NSUTF8StringEncoding];
+                }
+                
+                // return data
+                return bodyData;
+            }
         format: format 
         transform: transform 
         completion: completion
@@ -148,15 +169,18 @@
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
     context: (id)context
 {
-	// encode body data, if provided
-	NSData *bodyData = [parts data];
-	
-    // make request
-    return [self beginRequestWithURL: uri 
+    return [self _beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
-        bodyData: bodyData
+        bodyDataProvider: ^NSData * (DEServiceOperation *operation)
+            {
+                // encode body data
+                NSData *bodyData = [parts data];
+                
+                // return data
+                return bodyData;
+            }
         format: format 
         transform: transform 
         completion: completion
@@ -176,11 +200,14 @@
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     context: (id)context
 {
-    return [self beginRequestWithURL: uri 
+    return [self _beginRequestWithURL: uri 
         method: method 
         headers: headers 
         parameters: parameters 
-        bodyData: bodyData 
+        bodyDataProvider: ^NSData * (DEServiceOperation *operation)
+            {
+                return bodyData;
+            }
         format: format 
         transform: transform 
         completion: completion
@@ -202,7 +229,65 @@
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
     context: (id)context
-{
+{	
+    return [self _beginRequestWithURL: uri 
+        method: method 
+        headers: headers 
+        parameters: parameters 
+        bodyDataProvider: bodyData == nil
+            ? nil
+            : ^NSData * (DEServiceOperation *operation)
+                {
+                    return bodyData;
+                } 
+        format: format 
+        transform: transform 
+        completion: completion 
+        queuePriority: queuePriority 
+        dispatchPriority: dispatchPriority 
+        cachePolicy: cachePolicy 
+        context: context];
+}
+
+- (DEServiceOperation *)beginRequest: (NSURLRequest *)request
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    context: (id)context
+{    
+    // create request operation
+    DEServiceOperation *operation = [[DEServiceOperation alloc]
+        _initWithRequest: request
+        bodyDataProvider: nil
+        format: format 
+        dispatchPriority: dispatchPriority 
+        transform: transform
+        completion: completion
+        serviceClient: self
+        context: context];
+    [operation setQueuePriority: queuePriority];
+    
+    // start operation
+    [_requestQueue addOperation: operation];
+
+    return operation;
+}
+
+- (DEServiceOperation *)_beginRequestWithURL: (NSString *)uri
+    method: (DEServiceMethod)method
+    headers: (NSDictionary *)headers
+    parameters: (NSDictionary *)parameters    
+    bodyDataProvider: (NSData * (^)(DEServiceOperation *))dataProvider
+    format: (DEServiceFormat)format
+    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
+    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
+    queuePriority: (NSOperationQueuePriority)queuePriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    cachePolicy: (NSURLRequestCachePolicy)cachePolicy
+    context: (id)context
+{    
     // apply query parameters (if any)
     if (parameters != nil
         && [parameters count] > 0)
@@ -239,34 +324,11 @@
     [request setAllHTTPHeaderFields: headers];
     [request setTimeoutInterval: _requestTimeout];
 	[request setCachePolicy: cachePolicy];
-	
-	// set body, if provided
-	if (bodyData != nil)
-	{
-		[request setHTTPBody: bodyData];
-    }
 
-    // process request
-    return [self beginRequest: request 
-        format: format 
-        transform: transform 
-        completion: completion 
-        queuePriority: queuePriority 
-        dispatchPriority: dispatchPriority
-        context: context];
-}
-
-- (DEServiceOperation *)beginRequest: (NSURLRequest *)request
-    format: (DEServiceFormat)format
-    transform: (id (^)(NSHTTPURLResponse *response, id data))transform
-    completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
-    queuePriority: (NSOperationQueuePriority)queuePriority
-    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
-    context: (id)context
-{    
     // create request operation
     DEServiceOperation *operation = [[DEServiceOperation alloc]
         _initWithRequest: request
+        bodyDataProvider: dataProvider
         format: format 
         dispatchPriority: dispatchPriority 
         transform: transform

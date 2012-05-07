@@ -31,8 +31,9 @@
 #pragma mark Methods
 
 - (id)_initWithRequest: (NSURLRequest *)request
+    bodyDataProvider: (NSData * (^)(DEServiceOperation *))dataProvider
     format: (DEServiceFormat)format
-    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
+    dispatchPriority: (dispatch_queue_priority_t)dispatchPriority    
     transform: (id (^)(NSHTTPURLResponse *response, id data))transform
     completion: (void (^)(DEServiceResult result, NSHTTPURLResponse *response, id data))completion
     serviceClient: (DEServiceClient *)serviceClient

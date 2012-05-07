@@ -21,7 +21,7 @@
 
 #pragma mark Constants
 
-NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
+NSString * const DEMultipartTokenDefault = @"__com.dedios.ServiceClient__";
 
 
 #pragma mark -
@@ -30,7 +30,7 @@ NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
 @interface DEMultipartCollection()
 {
     @private __strong NSArray *_parts;
-    @private __strong NSString *_partDelimiter;
+    @private __strong NSString *_partToken;
 }
 @end  // @interface DEMultipartCollection()
 
@@ -45,7 +45,7 @@ NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
 #pragma mark Properties
 
 @synthesize parts = _parts;
-@synthesize partDelimiter = _partDelimiter;
+@synthesize partToken = _partToken;
 
 
 #pragma mark -
@@ -79,7 +79,7 @@ NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
     
     // initialize instance variables
     _parts = parts;
-    _partDelimiter = DEMultipartDelimiterDefault;
+    _partToken = DEMultipartTokenDefault;
     
     // return instance
     return self;
@@ -91,9 +91,59 @@ NSString * const DEMultipartDelimiterDefault = @"__com.dedios.ServiceClient__";
 
 - (NSData *)data
 {
-    [NSException raise: @"NotImplemented" 
-        format: @"The MultipartCollection is not yet complete"];
-    return nil;
+    // allocate data
+    NSMutableData *data = [[NSMutableData alloc]
+        initWithCapacity: 128];
+        
+    // define constants
+    NSString *partDelimiter = [NSString stringWithFormat: @"--%@\r\n",
+		_partToken];
+    NSData *partDelimiterData = [partDelimiter
+		dataUsingEncoding: NSUTF8StringEncoding];
+	NSData *newlineData = [[NSString stringWithString: @"\r\n"]
+		dataUsingEncoding: NSUTF8StringEncoding];
+    
+    for (DEMultipart *multipart in _parts) 
+    {
+        @autoreleasepool 
+        {
+            // append delimiter
+            [data appendData: partDelimiterData];
+            
+            // append part metadata
+            [data appendData: [[NSString stringWithFormat: 
+                @"Content-Disposition: form-data; name=\"%@\"\r\n", 
+                multipart.name] 
+                    dataUsingEncoding: NSUTF8StringEncoding]];
+                    
+            NSString *contentType = multipart.contentType;
+            if (contentType == nil
+                || [[NSNull null] isEqual: contentType])
+            {
+                [data appendData: newlineData];
+            }
+            else 
+            {  
+                [data appendData: [[NSString stringWithFormat: 
+                    @"Content-Type: %@\r\n", 
+                    contentType] 
+                        dataUsingEncoding: NSUTF8StringEncoding]];
+            }
+            
+            // append part
+            [data appendData: [multipart data]];
+            
+            // append final newline
+            [data appendData: newlineData];
+        }
+    }
+    
+    // finalize data
+    [data appendData: [[NSString stringWithFormat: @"--%@--\r\n", _partToken] 
+        dataUsingEncoding: NSUTF8StringEncoding]];
+
+    // return data
+    return data;
 }
 
 

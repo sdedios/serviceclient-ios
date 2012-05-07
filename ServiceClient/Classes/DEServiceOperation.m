@@ -32,9 +32,10 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 @interface DEServiceOperation()
 {
     @private __strong DEServiceClient *_serviceClient;
-    @private __strong NSURLRequest *_request;
+    @private __strong NSMutableURLRequest *_request;
     @private DEServiceFormat _format;
     @private dispatch_queue_priority_t _dispatchPriority;
+    @private NSData * (__strong ^_bodyDataProvider)(DEServiceOperation *);
     @private id (__strong ^_transform)(NSHTTPURLResponse *, id);
     @private void (__strong ^_completion)(DEServiceResult, NSHTTPURLResponse *, id);
     @private __strong id _context;
@@ -76,6 +77,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 #pragma mark Constructors
 
 - (id)_initWithRequest: (NSURLRequest *)request
+    bodyDataProvider: (NSData * (^)(DEServiceOperation *))dataProvider
     format: (DEServiceFormat)format
     dispatchPriority: (dispatch_queue_priority_t)dispatchPriority
     transform: (id (^)(NSHTTPURLResponse *, id))transform
@@ -90,11 +92,12 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	}
 	
 	// initialize instance variables
-    _request = [request copy];
+    _request = [request mutableCopy];
     _format = format;
     _dispatchPriority = dispatchPriority;
-    _transform = transform == 0 ? nil : [transform copy];
-    _completion = completion == 0 ? nil : [completion copy];
+    _bodyDataProvider = dataProvider == nil ? nil : [dataProvider copy];
+    _transform = transform == nil ? nil : [transform copy];
+    _completion = completion == nil ? nil : [completion copy];
     _serviceClient = serviceClient;
     _context = context;
 
@@ -162,6 +165,18 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
             
             // set connection as alive
             _connectionIsCancelled = NO;
+            
+            // add body data to request (if any)
+            NSData *bodyData = _bodyDataProvider == nil
+                ? nil
+                : _bodyDataProvider(self);
+            if (bodyData != nil)
+            {
+                [_request setHTTPBody: bodyData];
+            }
+            
+            // ensure body data provider is released (frees intermediate data)
+            _bodyDataProvider = nil;
             
             // create a new connection for the request (starts immediately)
             connection = [[NSURLConnection alloc]

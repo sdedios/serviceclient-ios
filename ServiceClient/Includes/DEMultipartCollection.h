@@ -19,7 +19,7 @@
 
 #pragma mark Constants
 
-NSString * const DEMultipartDelimiterDefault;
+NSString * const DEMultipartTokenDefault;
 
 
 #pragma mark -
@@ -41,7 +41,7 @@ NSString * const DEMultipartDelimiterDefault;
 
 @property (nonatomic, readonly) NSArray *parts;
 
-@property (nonatomic, copy) NSString *partDelimiter;
+@property (nonatomic, copy) NSString *partToken;
 
 
 @end  // @interface DEMultipartCollection
