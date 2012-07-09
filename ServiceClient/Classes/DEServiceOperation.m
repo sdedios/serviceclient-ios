@@ -379,17 +379,18 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 
 #pragma mark -
-#pragma mark NSURLConnection Delegate Methods
+#pragma mark NSURLConnectionDelegate Methods
 
-- (void)connection: (NSURLConnection *)connection
-    didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
+- (void)connection: (NSURLConnection *)connection 
+    willSendRequestForAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
 {
     // cancel if not first attempt
+    id<NSURLAuthenticationChallengeSender> challenger = challenge.sender;
     NSInteger retryCount = challenge.previousFailureCount;
     if (retryCount != 0)
     {
         // cancel authentication
-        [challenge.sender cancelAuthenticationChallenge: challenge];
+        [challenger cancelAuthenticationChallenge: challenge];
         
         // TODO: notify service client
         
@@ -397,23 +398,45 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
         return;
     }
     
-    // get credential from service client
+    // handle SSL
+    if ([challenge.protectionSpace.authenticationMethod 
+        isEqualToString: NSURLAuthenticationMethodServerTrust])
+    {
+        // force trust if whitelisted
+        NSString *host = connection.currentRequest.URL.host;
+        if ([_serviceClient requireValidSslAuthorityForDomain: host] == NO)
+        {
+            [challenger
+                continueWithoutCredentialForAuthenticationChallenge: challenge];
+        }
+        
+        // or use default handling
+        else 
+        {
+            [challenger
+                performDefaultHandlingForAuthenticationChallenge: challenge];
+        }
+        
+        // stop processing
+        return;
+    }
+    
+    // validate using 
     NSURLCredential *credential = [_serviceClient 
         credentialForServiceOperation: self
-        challenge: challenge];
-    
-    // use credential if provided
+        challenge: challenge];    
     if (credential != nil
         && [[NSNull null] isEqual: credential] == NO)
     {
-        [challenge.sender useCredential: credential 
+        [challenger useCredential: credential 
             forAuthenticationChallenge: challenge];
     }
     
-    // or cancel challenge
+    // or handle using default method
     else 
     {
-        [challenge.sender cancelAuthenticationChallenge: challenge];
+        [challenger 
+            performDefaultHandlingForAuthenticationChallenge: challenge];
     }
 }
 

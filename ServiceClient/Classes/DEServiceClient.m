@@ -356,6 +356,11 @@
 {
 }
 
+- (BOOL)requireValidSslAuthorityForDomain: (NSString *)domain
+{
+    return YES;
+}
+
 - (NSURLCredential *)credentialForServiceOperation: (DEServiceOperation *)operation
     challenge: (NSURLAuthenticationChallenge *)challenge
 {
