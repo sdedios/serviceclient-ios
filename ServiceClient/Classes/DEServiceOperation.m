@@ -70,6 +70,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 #pragma mark -
 #pragma mark Properties
 
+@synthesize request = _request;
 @synthesize context = _context;
 
 
@@ -393,29 +394,6 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
         [challenger cancelAuthenticationChallenge: challenge];
         
         // TODO: notify service client
-        
-        // stop processing
-        return;
-    }
-    
-    // handle SSL
-    if ([challenge.protectionSpace.authenticationMethod 
-        isEqualToString: NSURLAuthenticationMethodServerTrust])
-    {
-        // force trust if whitelisted
-        NSString *host = connection.currentRequest.URL.host;
-        if ([_serviceClient requireValidSslAuthorityForDomain: host] == NO)
-        {
-            [challenger
-                continueWithoutCredentialForAuthenticationChallenge: challenge];
-        }
-        
-        // or use default handling
-        else 
-        {
-            [challenger
-                performDefaultHandlingForAuthenticationChallenge: challenge];
-        }
         
         // stop processing
         return;

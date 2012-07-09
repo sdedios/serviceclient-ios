@@ -117,8 +117,6 @@
 - (void)serviceOperationFailed: (DEServiceOperation *)operation
     error: (NSError *)error;
 
-- (BOOL)requireValidSslAuthorityForDomain: (NSString *)domain;
-
 - (NSURLCredential *)credentialForServiceOperation: (DEServiceOperation *)operation
     challenge: (NSURLAuthenticationChallenge *)challenge;
 

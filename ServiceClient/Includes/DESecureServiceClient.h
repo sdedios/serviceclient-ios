@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-#import "DEServiceClientDefines.h"
- 
+#import "DEServiceClient.h"
 
-#pragma mark Class Declaration
 
-@interface DEServiceOperation : NSOperation
+#pragma mark Class Interface
+
+@interface DESecureServiceClient : DEServiceClient
 
 
 #pragma mark -
-#pragma mark Properties
+#pragma mark Instance Methods
 
-@property (nonatomic, strong, readonly) NSURLRequest *request;
-
-@property (nonatomic, strong) id context;
+- (BOOL)requireValidCertificateForDomain: (NSString *)domain;
 
 
-@end  // @interface DEServiceOperation
+@end  // @interface DESecureServiceClient

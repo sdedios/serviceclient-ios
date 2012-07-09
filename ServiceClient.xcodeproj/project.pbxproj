@@ -40,6 +40,8 @@
 		FBB188A21554A41A00C31372 /* DEMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A11554A41A00C31372 /* DEMultipart.m */; };
 		FBB188A41554A46300C31372 /* DEMultipartCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB188A31554A46300C31372 /* DEMultipartCollection.m */; };
 		FBB188A61554C02500C31372 /* DEMultipart_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB188A51554C02500C31372 /* DEMultipart_Internal.h */; };
+		FBB32A8F15AB937400506CF4 /* DESecureServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FBB32A8E15AB937400506CF4 /* DESecureServiceClient.h */; };
+		FBB32A9115AB942F00506CF4 /* DESecureServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB32A9015AB942F00506CF4 /* DESecureServiceClient.m */; };
 		FBE89460153CB2D800FB01BD /* DEServiceHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */; };
 		FBE89463153CB30200FB01BD /* DEServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE89462153CB30200FB01BD /* DEServiceHelper.m */; };
 		FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF30A2715537D0600C94946 /* DENetworkIndicatorHelper.m */; };
@@ -108,6 +110,8 @@
 		FBB188A11554A41A00C31372 /* DEMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipart.m; sourceTree = "<group>"; };
 		FBB188A31554A46300C31372 /* DEMultipartCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipartCollection.m; sourceTree = "<group>"; };
 		FBB188A51554C02500C31372 /* DEMultipart_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipart_Internal.h; sourceTree = "<group>"; };
+		FBB32A8E15AB937400506CF4 /* DESecureServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESecureServiceClient.h; sourceTree = "<group>"; };
+		FBB32A9015AB942F00506CF4 /* DESecureServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESecureServiceClient.m; sourceTree = "<group>"; };
 		FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceHelper.h; sourceTree = "<group>"; };
 		FBE89462153CB30200FB01BD /* DEServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceHelper.m; sourceTree = "<group>"; };
 		FBF30A2615537D0600C94946 /* DENetworkIndicatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DENetworkIndicatorHelper.h; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				FBB188A51554C02500C31372 /* DEMultipart_Internal.h */,
 				FBB188A31554A46300C31372 /* DEMultipartCollection.m */,
 				FB06C4A115573EE900EA3441 /* DEMultipartCollection_Internal.h */,
+				FBB32A9015AB942F00506CF4 /* DESecureServiceClient.m */,
 				FB64C11D153900F40010136A /* DEServiceClient.m */,
 				FBE89462153CB30200FB01BD /* DEServiceHelper.m */,
 				FB64C125153910250010136A /* DEServiceOperation.m */,
@@ -289,6 +294,7 @@
 				FB64C123153905E50010136A /* DEServiceClientDefines.h */,
 				FBB1889D1554A2E400C31372 /* DEMultipart.h */,
 				FBB1889F1554A3BA00C31372 /* DEMultipartCollection.h */,
+				FBB32A8E15AB937400506CF4 /* DESecureServiceClient.h */,
 				FB64C11F153900F40010136A /* DEServiceClient.h */,
 				FBE8945F153CB2D800FB01BD /* DEServiceHelper.h */,
 				FB66EB70153F425400479972 /* DEServiceOperation.h */,
@@ -345,6 +351,7 @@
 				FBB188A01554A3BA00C31372 /* DEMultipartCollection.h in Headers */,
 				FBB188A61554C02500C31372 /* DEMultipart_Internal.h in Headers */,
 				FB06C4A215573EE900EA3441 /* DEMultipartCollection_Internal.h in Headers */,
+				FBB32A8F15AB937400506CF4 /* DESecureServiceClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +503,7 @@
 				FB66EB771540CD7D00479972 /* DEServiceClientDefines.m in Sources */,
 				FBB188A21554A41A00C31372 /* DEMultipart.m in Sources */,
 				FBB188A41554A46300C31372 /* DEMultipartCollection.m in Sources */,
+				FBB32A9115AB942F00506CF4 /* DESecureServiceClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
