@@ -100,9 +100,11 @@ NSString * const DEMultipartTokenDefault = @"__com.dedios.ServiceClient__";
 		_partToken];
     NSData *partDelimiterData = [partDelimiter
 		dataUsingEncoding: NSUTF8StringEncoding];
-	NSData *newlineData = [[NSString stringWithString: @"\r\n"]
+	NSData *newlineData = [@"\r\n"
 		dataUsingEncoding: NSUTF8StringEncoding];
     
+    // append parts to data
+    NSNull *null = [NSNull null];
     for (DEMultipart *multipart in _parts) 
     {
         @autoreleasepool 
@@ -110,30 +112,45 @@ NSString * const DEMultipartTokenDefault = @"__com.dedios.ServiceClient__";
             // append delimiter
             [data appendData: partDelimiterData];
             
-            // append part metadata
-            [data appendData: [[NSString stringWithFormat: 
-                @"Content-Disposition: form-data; name=\"%@\"\r\n", 
-                multipart.name] 
-                    dataUsingEncoding: NSUTF8StringEncoding]];
-                    
-            NSString *contentType = multipart.contentType;
-            if (contentType == nil
-                || [[NSNull null] isEqual: contentType])
+            // append standard part disposition
+            NSString *filename = multipart.filename;
+            if (filename == nil
+                || [null isEqual: filename])
             {
-                [data appendData: newlineData];
-            }
-            else 
-            {  
                 [data appendData: [[NSString stringWithFormat: 
+                    @"Content-Disposition: form-data; name=\"%@\"\r\n", 
+                    multipart.name] 
+                        dataUsingEncoding: NSUTF8StringEncoding]];
+            }
+            
+            // or append file part disposition
+            else
+            {
+                [data appendData: [[NSString stringWithFormat: 
+                    @"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n",
+                    multipart.name, filename]
+                        dataUsingEncoding: NSUTF8StringEncoding]];
+            }
+            
+            // append content type if specified
+            NSString *contentType = multipart.contentType;
+            if (contentType != nil
+                && [null isEqual: contentType] == NO)
+            {
+                [data appendData: [[NSString stringWithFormat:
                     @"Content-Type: %@\r\n", 
                     contentType] 
                         dataUsingEncoding: NSUTF8StringEncoding]];
             }
             
-            // append part
+            // end part header
+            [data appendData: newlineData];
+
+            
+            // append part body
             [data appendData: [multipart data]];
             
-            // append final newline
+            // end part body
             [data appendData: newlineData];
         }
     }

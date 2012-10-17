@@ -16,7 +16,7 @@
  
 #import "DEDemosViewController.h"
 #import "DEGithubViewController.h"
-#import "DETwitterViewController.h"
+#import "DEMultipartViewController.h"
 
 
 #pragma mark Class Extension
@@ -98,11 +98,11 @@
     switch (indexPath.row)
     {
         case 0:
-            cell.textLabel.text = @"Twitter Client";
+            cell.textLabel.text = @"Github Client";
             break;
             
         case 1:
-            cell.textLabel.text = @"Github Client";
+            cell.textLabel.text = @"Multipart Post";
             break;
     }
     
@@ -119,14 +119,13 @@
 {
     // handle selection
     switch (indexPath.row)
-    {
-        // show twitter controller
+    {            
         case 0:
         {
             // create controller
-            DETwitterViewController *controller = 
-                [[DETwitterViewController alloc]
-                    initWithNibName: @"DETwitterView" 
+            DEGithubViewController *controller = 
+                [[DEGithubViewController alloc]
+                    initWithNibName: @"DEGithubView" 
                     bundle: nil];
                     
             // push onto navigation
@@ -134,13 +133,13 @@
                 animated: YES];
             break;
         }
-            
+
         case 1:
         {
             // create controller
-            DEGithubViewController *controller = 
-                [[DEGithubViewController alloc]
-                    initWithNibName: @"DEGithubView" 
+            DEMultipartViewController *controller = 
+                [[DEMultipartViewController alloc]
+                    initWithNibName: @"DEMultipartView" 
                     bundle: nil];
                     
             // push onto navigation

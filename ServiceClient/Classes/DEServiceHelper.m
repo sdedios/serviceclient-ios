@@ -107,12 +107,17 @@ static const char *_base64EncodingTable =
     // terminate with eos (null character)
     *outputWriter = '\0';
 
-    // return string
-    return [NSString stringWithCString: outputBuffer 
+    // encode output and release buffer
+    NSString *encodedData = [NSString stringWithCString: outputBuffer
         encoding: NSASCIIStringEncoding];
+    free(outputBuffer);
+    
+    // return encoded data
+    return encodedData;
 }
 
-static const short _base64DecodingTable[256] = {
+static const short _base64DecodingTable[256] =
+{
     -2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
     -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
     -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, 62, -2, -2, -2, 63,

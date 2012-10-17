@@ -169,9 +169,19 @@
     cachePolicy: (NSURLRequestCachePolicy)cachePolicy
     context: (id)context
 {
+    // add/replace content type in headers
+    NSMutableDictionary *updatedHeaders = [[NSMutableDictionary alloc]
+        initWithDictionary: headers];
+    [updatedHeaders
+        setObject: [NSString
+            stringWithFormat: @"multipart/form-data; boundary=%@",
+                parts.partToken]
+        forKey: @"Content-Type"];
+
+    // send request
     return [self _beginRequestWithURL: uri 
         method: method 
-        headers: headers 
+        headers: updatedHeaders 
         parameters: parameters 
         bodyDataProvider: ^NSData * (DEServiceOperation *operation)
             {

@@ -16,6 +16,7 @@
 
 #import "DEMultipart.h"
 #import "DEMultipart_Internal.h"
+#import "DEServiceHelper.h"
 
 
 #pragma mark Class Extension
@@ -23,6 +24,7 @@
 @interface DEMultipart()
 {
     @private __strong NSString *_name;
+    @private __strong NSString *_filename;
     @private __strong NSString *_contentType;
     @private NSData * (__strong ^_dataProvider)();
 }
@@ -39,6 +41,7 @@
 #pragma mark Properties
 
 @synthesize name = _name;
+@synthesize filename = _filename;
 @synthesize contentType = _contentType;
 
 
@@ -54,8 +57,9 @@
         {
             return providerData;
         } 
-        name: [name copy] 
-        contentType: [contentType copy]];
+        name: name
+        filename: nil
+        contentType: contentType];
 }
 
 - (id)initWithData: (NSData *)data
@@ -67,27 +71,52 @@
         {
             return providerData;
         } 
-        name: [name copy] 
-        contentType: [contentType copy]];
+        name: name
+        filename: nil
+        contentType: contentType];
 }
 
 - (id)initWithContentsOfFile: (NSString *)path
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType
 {
     NSString *providerDataPath = [path copy];
     return [self initWithDataProvider: ^NSData *
         {
-            NSData *providerData = [NSData 
+            NSData *data = [NSData
                 dataWithContentsOfFile: providerDataPath];
+            NSString *encodedData = [DEServiceHelper base64Encode: data];
+            NSData *providerData = [encodedData
+                dataUsingEncoding: NSUTF8StringEncoding];
             return providerData;
         } 
-        name: [name copy] 
-        contentType: [contentType copy]];
+        name: name
+        filename: filename
+        contentType: contentType];
+}
+
+- (id)initWithDataOfFile: (NSData *)data
+    name: (NSString *)name
+    filename: (NSString *)filename
+    contentType: (NSString *)contentType
+{
+    data = [data copy];
+    return [self initWithDataProvider: ^NSData *
+        {
+            NSString *encodedData = [DEServiceHelper base64Encode: data];
+            NSData *providerData = [encodedData
+                dataUsingEncoding: NSUTF8StringEncoding];
+            return providerData;
+        } 
+        name: name
+        filename: filename
+        contentType: contentType];
 }
 
 - (id)initWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType
 {
     // abort if allocation fails
@@ -97,8 +126,9 @@
     }
     
     // initialize instance variables
-    _name = name;
-    _contentType = contentType;
+    _name = [name copy];
+    _filename = filename == nil ? nil : [filename copy];
+    _contentType = [contentType copy];
     _dataProvider = [dataProvider copy];
     
     // return instance
@@ -131,24 +161,41 @@
     return multipart;
 }
 
++ (DEMultipart *)multipartWithDataOfFile: (NSData *)data
+    name: (NSString *)name
+    filename: (NSString *)filename
+    contentType: (NSString *)contentType
+{
+    DEMultipart *multipart = [[DEMultipart alloc]
+        initWithDataOfFile: data
+        name: name
+        filename: filename
+        contentType: contentType];
+    return multipart;
+}
+
 + (DEMultipart *)multipartWithContentsOfFile: (NSString *)path
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType
 {
     DEMultipart *multipart = [[DEMultipart alloc]
         initWithContentsOfFile: path
-        name: name 
+        name: name
+        filename: filename
         contentType: contentType];
     return multipart;
 }
 
 + (DEMultipart *)multipartWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType
 {
     DEMultipart *multipart = [[DEMultipart alloc]
         initWithDataProvider: dataProvider
-        name: name 
+        name: name
+        filename: filename
         contentType: contentType];
     return multipart;
 }

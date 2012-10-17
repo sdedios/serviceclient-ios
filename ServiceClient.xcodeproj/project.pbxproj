@@ -18,10 +18,10 @@
 		FB478BE51541E90400EA06F4 /* DEDemosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BE31541E90400EA06F4 /* DEDemosViewController.m */; };
 		FB478BEB1541E9A800EA06F4 /* DEDemosView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BE91541E9A800EA06F4 /* DEDemosView.xib */; };
 		FB478BEF1541F5D900EA06F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB478BEE1541F5D900EA06F4 /* UIKit.framework */; };
-		FB478BF71541FE5200EA06F4 /* DETwitterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BF61541FE5200EA06F4 /* DETwitterView.xib */; };
 		FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BF91542267100EA06F4 /* DEGithubViewController.m */; };
-		FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB478BFC154226B400EA06F4 /* DETwitterViewController.m */; };
 		FB478BFF154226DF00EA06F4 /* DEGithubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB478BFE154226DF00EA06F4 /* DEGithubView.xib */; };
+		FB641DBC162DA4F20021AB97 /* DEMultipartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB641DBB162DA4F20021AB97 /* DEMultipartView.xib */; };
+		FB641DC0162DA5060021AB97 /* DEMultipartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB641DBF162DA5060021AB97 /* DEMultipartViewController.m */; };
 		FB64C120153900F40010136A /* DEServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FB64C11D153900F40010136A /* DEServiceClient.m */; };
 		FB64C121153900F40010136A /* DEServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FB64C11F153900F40010136A /* DEServiceClient.h */; };
 		FB64C124153905E50010136A /* DEServiceClientDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = FB64C123153905E50010136A /* DEServiceClientDefines.h */; };
@@ -79,12 +79,12 @@
 		FB478BE31541E90400EA06F4 /* DEDemosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEDemosViewController.m; sourceTree = "<group>"; };
 		FB478BE91541E9A800EA06F4 /* DEDemosView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEDemosView.xib; sourceTree = "<group>"; };
 		FB478BEE1541F5D900EA06F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		FB478BF61541FE5200EA06F4 /* DETwitterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DETwitterView.xib; sourceTree = "<group>"; };
 		FB478BF81542267100EA06F4 /* DEGithubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGithubViewController.h; sourceTree = "<group>"; };
 		FB478BF91542267100EA06F4 /* DEGithubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGithubViewController.m; sourceTree = "<group>"; };
-		FB478BFB154226B400EA06F4 /* DETwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETwitterViewController.h; sourceTree = "<group>"; };
-		FB478BFC154226B400EA06F4 /* DETwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETwitterViewController.m; sourceTree = "<group>"; };
 		FB478BFE154226DF00EA06F4 /* DEGithubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEGithubView.xib; sourceTree = "<group>"; };
+		FB641DBB162DA4F20021AB97 /* DEMultipartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEMultipartView.xib; sourceTree = "<group>"; };
+		FB641DBE162DA5060021AB97 /* DEMultipartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMultipartViewController.h; sourceTree = "<group>"; };
+		FB641DBF162DA5060021AB97 /* DEMultipartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMultipartViewController.m; sourceTree = "<group>"; };
 		FB64C11D153900F40010136A /* DEServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEServiceClient.m; sourceTree = "<group>"; };
 		FB64C11F153900F40010136A /* DEServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceClient.h; sourceTree = "<group>"; };
 		FB64C123153905E50010136A /* DEServiceClientDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEServiceClientDefines.h; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				FB478BF11541FD6200EA06F4 /* Github */,
-				FB478BF21541FD6200EA06F4 /* Twitter */,
+				FB641DBD162DA5060021AB97 /* Multipart */,
 				FB478BE21541E90400EA06F4 /* DEDemosViewController.h */,
 				FB478BE31541E90400EA06F4 /* DEDemosViewController.m */,
 				FB7C08C01550D14200428C89 /* DEDemoViewController.h */,
@@ -238,7 +238,7 @@
 			children = (
 				FB478BE91541E9A800EA06F4 /* DEDemosView.xib */,
 				FB478BFE154226DF00EA06F4 /* DEGithubView.xib */,
-				FB478BF61541FE5200EA06F4 /* DETwitterView.xib */,
+				FB641DBB162DA4F20021AB97 /* DEMultipartView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,13 +262,13 @@
 			path = Github;
 			sourceTree = "<group>";
 		};
-		FB478BF21541FD6200EA06F4 /* Twitter */ = {
+		FB641DBD162DA5060021AB97 /* Multipart */ = {
 			isa = PBXGroup;
 			children = (
-				FB478BFB154226B400EA06F4 /* DETwitterViewController.h */,
-				FB478BFC154226B400EA06F4 /* DETwitterViewController.m */,
+				FB641DBE162DA5060021AB97 /* DEMultipartViewController.h */,
+				FB641DBF162DA5060021AB97 /* DEMultipartViewController.m */,
 			);
-			path = Twitter;
+			path = Multipart;
 			sourceTree = "<group>";
 		};
 		FB64C11C153900F40010136A /* Classes */ = {
@@ -455,8 +455,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB478BEB1541E9A800EA06F4 /* DEDemosView.xib in Resources */,
-				FB478BF71541FE5200EA06F4 /* DETwitterView.xib in Resources */,
 				FB478BFF154226DF00EA06F4 /* DEGithubView.xib in Resources */,
+				FB641DBC162DA4F20021AB97 /* DEMultipartView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,11 +523,11 @@
 				FB66EBF11540EF5D00479972 /* AppDelegate.m in Sources */,
 				FB478BE51541E90400EA06F4 /* DEDemosViewController.m in Sources */,
 				FB478BFA1542267100EA06F4 /* DEGithubViewController.m in Sources */,
-				FB478BFD154226B400EA06F4 /* DETwitterViewController.m in Sources */,
 				FB78153D1548E1A300D8176A /* DEGithubClient.m in Sources */,
 				FB7C08BE1550CAC400428C89 /* DEGithubRepo.m in Sources */,
 				FB7C08C21550D14300428C89 /* DEDemoViewController.m in Sources */,
 				FBF30A2815537D0600C94946 /* DENetworkIndicatorHelper.m in Sources */,
+				FB641DC0162DA5060021AB97 /* DEMultipartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

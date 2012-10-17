@@ -24,6 +24,8 @@
 
 @property (nonatomic, readonly) NSString *name;
 
+@property (nonatomic, readonly) NSString *filename;
+
 @property (nonatomic, readonly) NSString *contentType;
 
 
@@ -38,12 +40,19 @@
     name: (NSString *)name
     contentType: (NSString *)contentType;
 
+- (id)initWithDataOfFile: (NSData *)data
+    name: (NSString *)name
+    filename: (NSString *)filename
+    contentType: (NSString *)contentType;
+
 - (id)initWithContentsOfFile: (NSString *)path
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType;
 
 - (id)initWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType;
 
 #pragma mark -
@@ -57,12 +66,19 @@
     name: (NSString *)name
     contentType: (NSString *)contentType;
 
++ (DEMultipart *)multipartWithDataOfFile: (NSData *)data
+    name: (NSString *)name
+    filename: (NSString *)filename
+    contentType: (NSString *)contentType;
+
 + (DEMultipart *)multipartWithContentsOfFile: (NSString *)path
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType;
 
 + (DEMultipart *)multipartWithDataProvider: (NSData *(^)())dataProvider
     name: (NSString *)name
+    filename: (NSString *)filename
     contentType: (NSString *)contentType;
 
 

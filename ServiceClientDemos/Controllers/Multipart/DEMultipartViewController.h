@@ -19,9 +19,11 @@
 
 #pragma mark Class Declaration
  
-@interface DETwitterViewController : DEDemoViewController<
+@interface DEMultipartViewController : DEDemoViewController<
     UITableViewDelegate,
-    UITableViewDataSource>
+    UITableViewDataSource,
+    UINavigationControllerDelegate,
+    UIImagePickerControllerDelegate>
 
 #pragma mark -
 #pragma mark Properties
@@ -29,4 +31,4 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 
-@end  // @interface DETwitterViewController
+@end  // @interface DEMultipartViewController
