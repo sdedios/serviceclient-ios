@@ -84,11 +84,8 @@
     NSString *providerDataPath = [path copy];
     return [self initWithDataProvider: ^NSData *
         {
-            NSData *data = [NSData
+            NSData *providerData = [NSData
                 dataWithContentsOfFile: providerDataPath];
-            NSString *encodedData = [DEServiceHelper base64Encode: data];
-            NSData *providerData = [encodedData
-                dataUsingEncoding: NSUTF8StringEncoding];
             return providerData;
         } 
         name: name
@@ -101,12 +98,9 @@
     filename: (NSString *)filename
     contentType: (NSString *)contentType
 {
-    data = [data copy];
+    NSData *providerData = [data copy];
     return [self initWithDataProvider: ^NSData *
         {
-            NSString *encodedData = [DEServiceHelper base64Encode: data];
-            NSData *providerData = [encodedData
-                dataUsingEncoding: NSUTF8StringEncoding];
             return providerData;
         } 
         name: name
