@@ -114,6 +114,11 @@
 
 - (void)serviceOperationDidEnd: (DEServiceOperation *)operation;
 
+- (BOOL)serviceOperationShouldRetry: (DEServiceOperation *)operation
+    response: (NSHTTPURLResponse *)response
+    data: (NSData *)data
+    attempt: (NSUInteger)retryCount;
+
 - (void)serviceOperationFailed: (DEServiceOperation *)operation
     error: (NSError *)error;
 

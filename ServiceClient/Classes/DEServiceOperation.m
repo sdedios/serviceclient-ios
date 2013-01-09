@@ -155,179 +155,214 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 - (void)main
 {
-	// start connection
-	@autoreleasepool 
+    // iterate until request is cancelled or completed
+    @try
     {
-        NSURLConnection *connection = nil;
-        @try 
+        BOOL requestInProgress = YES;
+        NSUInteger retryCount = 0;
+        do
         {
-            // notify client of connection start
-            [_serviceClient serviceOperationDidBegin: self];
-            
-            // set connection as alive
-            _connectionIsCancelled = NO;
-            
-            // add body data to request (if any)
-            NSData *bodyData = _bodyDataProvider == nil
-                ? nil
-                : _bodyDataProvider(self);
-            if (bodyData != nil)
+            // start connection
+            @autoreleasepool 
             {
-                [_request setHTTPBody: bodyData];
-            }
-            
-            // ensure body data provider is released (frees intermediate data)
-            _bodyDataProvider = nil;
-            
-            // create a new connection for the request (starts immediately)
-            connection = [[NSURLConnection alloc]
-                initWithRequest: _request 
-                delegate: self];
-                
-            // abort if connection failed
-            if (connection == nil)
-            {
-                // log error        
-                NSLog(@"Cannot create connection to %@", 
-                    [[_request URL] absoluteString]);
-                
-                // raise error
-                NSError *error = [[NSError alloc]
-                    initWithDomain: DEServiceClientErrorDomain 
-                    code: DEServiceClientAllocationError
-                    userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
-                        @"Unable to allocate underlying connection.", 
-                            NSLocalizedDescriptionKey,                        
-                        nil]];
-                [_serviceClient serviceOperationFailed: self 
-                    error: error];
-                
-                // stop processing
-                return;
-            }				
-
-            // start run loop
-            NSDate *distantFuture = [NSDate distantFuture];
-            NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-            while (_connectionIsCancelled == NO 
-                && [runLoop runMode: NSDefaultRunLoopMode 
-                        beforeDate: distantFuture]);
-            
-            // release connection
-            connection = nil;
-        }
-        
-        // log and supress any exceptions
-        @catch (NSException *e) 
-        {
-            NSLog(@"Unexpected exception during download: %@", e.reason);
-        }
-        
-        // complete operation
-        @finally
-        {
-            // notify client of connection end
-            [_serviceClient serviceOperationDidEnd: self];
-        
-            // check completion status
-            BOOL success = NO;
-            @synchronized(self)
-            {
-                success = _completed;
-            }
-            
-            // handle cancellation 
-            if ([self isCancelled] == YES)
-            {
-                [self raiseCompletionWithResult: DEServiceResultCancelled 
-                    response: nil 
-                    data: nil];
-            }
-            
-            // finalize download if completed
-            else if (success == YES)
-            {
-                // try to deserialize/transform data
-                BOOL errorEncountered = YES;
-                id data = nil;
+                NSURLConnection *connection = nil;
                 @try 
                 {
-                    // deserialize data
-                    NSError *error = nil;
-                    data = [_serviceClient serviceOperation: self 
-                        transformData: _responseData 
-                        format: _format 
-                        error: &error];
+                    // mark not completed
+                    @synchronized(self)
+                    {
+                        _completed = NO;
+                    }
+
+                    // notify client of connection start
+                    [_serviceClient serviceOperationDidBegin: self];
+                    
+                    // set connection as alive
+                    _connectionIsCancelled = NO;
+                    
+                    // add body data to request (if any)
+                    NSData *bodyData = _bodyDataProvider == nil
+                        ? nil
+                        : _bodyDataProvider(self);
+                    if (bodyData != nil)
+                    {
+                        [_request setHTTPBody: bodyData];
+                    }
+                    
+                    // ensure body data provider is released (frees intermediate data)
+                    _bodyDataProvider = nil;
+                    
+                    // create a new connection for the request (starts immediately)
+                    connection = [[NSURLConnection alloc]
+                        initWithRequest: _request 
+                        delegate: self];
                         
-                    // log error (if any)
-                    if (error != nil)
+                    // abort if connection failed
+                    if (connection == nil)
                     {
-                        NSLog(@"Response deserialize error: %@", 
-                            error.localizedDescription);
-                    }
+                        // log error        
+                        NSLog(@"Cannot create connection to %@", 
+                            [[_request URL] absoluteString]);
+                        
+                        // raise error
+                        NSError *error = [[NSError alloc]
+                            initWithDomain: DEServiceClientErrorDomain 
+                            code: DEServiceClientAllocationError
+                            userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"Unable to allocate underlying connection.", 
+                                    NSLocalizedDescriptionKey,                        
+                                nil]];
+                        [_serviceClient serviceOperationFailed: self 
+                            error: error];
+                        
+                        // stop processing
+                        return;
+                    }				
+
+                    // start run loop
+                    NSDate *distantFuture = [NSDate distantFuture];
+                    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+                    while (_connectionIsCancelled == NO 
+                        && [runLoop runMode: NSDefaultRunLoopMode 
+                                beforeDate: distantFuture]);
                     
-                    // or continue processing
-                    else 
-                    {
-                        // transform data (if required)
-                        if (_transform != nil)
-                        {
-                            data = _transform(_response, data);
-                        }
-                    
-                        // mark as error free
-                        errorEncountered = NO;
-                    }
+                    // release connection
+                    connection = nil;
                 }
                 
-                // suppress exceptions (handled via completion callback)
+                // log and supress any exceptions
                 @catch (NSException *e) 
-                {                
-                    NSLog(@"Response deserialize/transform failed unexpectedly: %@", 
-                        e.reason);     
-                        
-                    // reset data (unreliable state)
-                    data = nil;
+                {
+                    NSLog(@"Unexpected exception during download: %@",
+                        e.reason);
                 }
+                
+                // complete operation
+                @finally
+                {
+                    // notify client of connection end
+                    [_serviceClient serviceOperationDidEnd: self];
+                
+                    // check completion status
+                    BOOL success = NO;
+                    @synchronized(self)
+                    {
+                        success = _completed;
+                    }
+                    
+                    // handle cancellation 
+                    if ([self isCancelled] == YES)
+                    {
+                        // raise completion
+                        [self raiseCompletionWithResult: DEServiceResultCancelled 
+                            response: nil 
+                            data: nil];
+                        
+                        // stop processing
+                        return;
+                    }
+                    
+                    // retry if required
+                    BOOL retryRequired = [_serviceClient
+                        serviceOperationShouldRetry: self
+                        response: _response
+                        data: _responseData
+                        attempt: retryCount];
+                    if (retryRequired == YES)
+                    {
+                        ++retryCount;
+                    }
+                    
+                    // or download if completed
+                    else if (success == YES)
+                    {
+                        // try to deserialize/transform data
+                        BOOL errorEncountered = YES;
+                        id data = nil;
+                        @try 
+                        {
+                            // deserialize data
+                            NSError *error = nil;
+                            data = [_serviceClient serviceOperation: self 
+                                transformData: _responseData 
+                                format: _format 
+                                error: &error];
+                                
+                            // log error (if any)
+                            if (error != nil)
+                            {
+                                NSLog(@"Response deserialize error: %@", 
+                                    error.localizedDescription);
+                            }
+                            
+                            // or continue processing
+                            else 
+                            {
+                                // transform data (if required)
+                                if (_transform != nil)
+                                {
+                                    data = _transform(_response, data);
+                                }
+                            
+                                // mark as error free
+                                errorEncountered = NO;
+                            }
+                        }
+                        
+                        // suppress exceptions (handled via completion callback)
+                        @catch (NSException *e) 
+                        {                
+                            NSLog(@"Response deserialize/transform failed unexpectedly: %@", 
+                                e.reason);     
+                                
+                            // reset data (unreliable state)
+                            data = nil;
+                        }
 
-                // raise completion
-                [self raiseCompletionWithResult: errorEncountered
-                        ? DEServiceResultFailed
-                        : DEServiceResultSuccess
-                    response: _response 
-                    data: data];
+                        // raise completion
+                        [self raiseCompletionWithResult: errorEncountered
+                                ? DEServiceResultFailed
+                                : DEServiceResultSuccess
+                            response: _response 
+                            data: data];
+                        
+                        // mark request completed
+                        requestInProgress = NO;
+                    }
+                    
+                    // otherwise, raise failure
+                    else 
+                    {
+                        // raise completion
+                        [self raiseCompletionWithResult: DEServiceResultFailed
+                            response: _response 
+                            data: nil];
+                        
+                        // mark request completed
+                        requestInProgress = NO;
+                    }
+                }
             }
             
-            // otherwise, raise failure
-            else 
-            {
-                [self raiseCompletionWithResult: DEServiceResultFailed
-                    response: _response 
-                    data: nil];
-            }
-        
-            // raise executing/finished notifcations
-            [self willChangeValueForKey: FinishedKeyPath];
-            [self willChangeValueForKey: ExecutingKeyPath];
-            @synchronized(self)
-            {
-                _executing = NO;
-                _finished = YES;
-            }
-            [self didChangeValueForKey: ExecutingKeyPath];
-            [self didChangeValueForKey: FinishedKeyPath];
-            
-            // stop connection (if still open)
-            if (connection != nil)
-            {
-                [connection cancel];
-                connection = nil;
-            }
-            
-            // release response
+            // ensure response data is cleared
             _response = nil;
             _responseData = nil;
-        }        
+            
+        } while (requestInProgress);
+    }
+    
+    // ensure finished notification is raised
+    @finally
+    {
+        [self willChangeValueForKey: FinishedKeyPath];
+        [self willChangeValueForKey: ExecutingKeyPath];
+        @synchronized(self)
+        {
+            _executing = NO;
+            _finished = YES;
+        }
+        [self didChangeValueForKey: ExecutingKeyPath];
+        [self didChangeValueForKey: FinishedKeyPath];
     }
 }
 
