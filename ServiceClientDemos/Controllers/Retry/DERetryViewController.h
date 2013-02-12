@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+  
+#import "DEDemoViewController.h"
 
-#import "DEServiceClientDefines.h"
+
+#pragma mark - Class Declaration
  
-
-#pragma mark Class Declaration
-
-@interface DEServiceOperation : NSOperation
-
+@interface DERetryViewController : DEDemoViewController<
+    UITextFieldDelegate>
 
 #pragma mark -
 #pragma mark Properties
 
-@property (nonatomic, strong, readonly) NSMutableURLRequest *request;
 
-@property (nonatomic, strong) id context;
-
-
-@end  // @interface DEServiceOperation
+@end  // @interface DERetryViewController

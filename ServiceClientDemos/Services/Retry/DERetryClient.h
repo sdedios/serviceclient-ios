@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-#import "DEServiceClientDefines.h"
+#import "DEServiceClient.h"
  
-
+ 
 #pragma mark Class Declaration
-
-@interface DEServiceOperation : NSOperation
-
+ 
+@interface DERetryClient : DEServiceClient
 
 #pragma mark -
 #pragma mark Properties
 
-@property (nonatomic, strong, readonly) NSMutableURLRequest *request;
-
-@property (nonatomic, strong) id context;
+@property (nonatomic, copy) NSString *accessToken;
 
 
-@end  // @interface DEServiceOperation
+#pragma mark -
+#pragma mark Methods
+
+- (void)testWithCompletion: (void (^)(DEServiceResult result, NSInteger statusCode, NSString *message))completion;
+
+
+@end  // @interface DERetryClient

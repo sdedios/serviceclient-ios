@@ -248,5 +248,41 @@ static const short _base64DecodingTable[256] =
     return dictionary;
 }
 
++ (void)updateRequest: (NSMutableURLRequest *)request
+    setParameter: (NSString *)key
+    toValue: (NSString *)value
+{
+    // extract query parameters
+    NSURL *url = request.URL;
+    NSString *query = url.query;
+    NSMutableDictionary *parameters = [NSMutableDictionary
+        dictionaryWithDictionary: [self dictionaryFromURLArguments: query]];
+    
+    // update specified parameter
+    [parameters setObject: value
+        forKey: key];
+    
+    // remove existing query from uri (if required)
+    NSString *uri = url.absoluteString;
+    if (query != nil
+        && query.length > 0)
+    {
+        NSRange queryRange = [uri rangeOfString: query];
+        uri = [uri substringToIndex: queryRange.location - 1];
+    }
+
+    // append new query to uri
+    query = [self URLArgumentsFromDictionary: parameters];
+    uri = [NSString stringWithFormat: @"%@?%@", uri, query];
+    
+    // update request
+    request.URL = [NSURL URLWithString: uri];
+}
+
++ (void)updateRequest: (NSMutableURLRequest *)request
+    deleteParameter: (NSString *)key
+{
+}
+
 
 @end  // @implementation DEServiceHelper

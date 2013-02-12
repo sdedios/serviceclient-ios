@@ -31,4 +31,10 @@
 + (NSString *)URLArgumentsFromDictionary: (NSDictionary *)dictionary;
 + (NSDictionary *)dictionaryFromURLArguments: (NSString *)arguments;
 
++ (void)updateRequest: (NSMutableURLRequest *)request
+    setParameter: (NSString *)key
+    toValue: (NSString *)value;
++ (void)updateRequest: (NSMutableURLRequest *)request
+    deleteParameter: (NSString *)key;
+
 @end  // @interface DEServiceHelper

@@ -17,6 +17,7 @@
 #import "DEDemosViewController.h"
 #import "DEGithubViewController.h"
 #import "DEMultipartViewController.h"
+#import "DERetryViewController.h"
 
 
 #pragma mark Class Extension
@@ -76,7 +77,7 @@
 - (NSInteger)tableView: (UITableView *)tableView 
     numberOfRowsInSection: (NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView 
@@ -103,6 +104,10 @@
             
         case 1:
             cell.textLabel.text = @"Multipart Post";
+            break;
+            
+        case 2:
+            cell.textLabel.text = @"Retry Test";
             break;
     }
     
@@ -140,6 +145,20 @@
             DEMultipartViewController *controller = 
                 [[DEMultipartViewController alloc]
                     initWithNibName: @"DEMultipartView" 
+                    bundle: nil];
+                    
+            // push onto navigation
+            [self.navigationController pushViewController: controller 
+                animated: YES];
+            break;
+        }
+
+        case 2:
+        {
+            // create controller
+            DERetryViewController *controller =
+                [[DERetryViewController alloc]
+                    initWithNibName: @"DERetryView" 
                     bundle: nil];
                     
             // push onto navigation
