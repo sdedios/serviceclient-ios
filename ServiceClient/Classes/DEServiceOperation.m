@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#import <UIKit/UIKit.h>
 #import "DEServiceOperation.h"
 #import "DEServiceOperation_Internal.h"
 #import "DEServiceClient.h"
@@ -31,6 +32,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 @interface DEServiceOperation()
 {
+    @private UIBackgroundTaskIdentifier _backgroundTask;
     @private __strong DEServiceClient *_serviceClient;
     @private __strong NSMutableURLRequest *_request;
     @private DEServiceFormat _format;
@@ -49,6 +51,9 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 
 #pragma mark -
 #pragma mark Instance Methods
+
+- (void)beginBackgroundTask;
+- (void)endBackgroundTask;
 
 - (BOOL)isCompleted;
 
@@ -93,6 +98,7 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 	}
 	
 	// initialize instance variables
+    _backgroundTask = UIBackgroundTaskInvalid;
     _request = [request mutableCopy];
     _format = format;
     _dispatchPriority = dispatchPriority;
@@ -158,6 +164,9 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     // iterate until request is cancelled or completed
     @try
     {
+        // start background task
+        [self beginBackgroundTask];
+    
         BOOL requestInProgress = YES;
         NSUInteger retryCount = 0;
         do
@@ -391,6 +400,28 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
 #pragma mark -
 #pragma mark Internal Methods
 
+- (void)beginBackgroundTask
+{
+    if (_backgroundTask == UIBackgroundTaskInvalid)
+    {
+        _backgroundTask = [[UIApplication sharedApplication]
+            beginBackgroundTaskWithExpirationHandler: ^
+            {
+                [self endBackgroundTask];
+            }];
+    }
+}
+
+- (void)endBackgroundTask
+{
+    if (_backgroundTask != UIBackgroundTaskInvalid)
+    {
+        [[UIApplication sharedApplication]
+            endBackgroundTask: _backgroundTask];
+        _backgroundTask = UIBackgroundTaskInvalid;
+    }
+}
+
 - (BOOL)isCompleted
 {
 	@synchronized(self)
@@ -403,6 +434,8 @@ static NSString * const ExecutingKeyPath = @"isExecuting";
     response: (NSHTTPURLResponse *)response
     data: (id)data
 {
+    [self endBackgroundTask];
+
     if (_completion != nil)
     {
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
