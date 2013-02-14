@@ -24,13 +24,6 @@
 
 
 #pragma mark -
-#pragma mark Properties
-
-@synthesize requestQueue = _requestQueue;
-@synthesize requestTimeout = _requestTimeout;
-
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (BOOL)requireValidCertificateForDomain: (NSString *)domain

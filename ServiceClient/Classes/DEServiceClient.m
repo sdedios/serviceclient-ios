@@ -83,7 +83,7 @@
     
     // initalize instance variables
     _requestQueue = requestQueue;
-    _requestTimeout = 60.0;
+    _requestTimeout = DERequestTimeout;
     
     // return instance
     return self;

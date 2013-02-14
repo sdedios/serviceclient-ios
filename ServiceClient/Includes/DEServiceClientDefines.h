@@ -16,7 +16,7 @@
  
 #pragma mark Constants
 
-#define RequestTimeout 30.0
+#define DERequestTimeout 30.0
 
 
 #pragma mark -
