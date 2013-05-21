@@ -59,7 +59,7 @@ static const char *_base64EncodingTable =
     
     // create input/output buffers
     const unsigned char *inputReader = [data bytes];
-    char *outputBuffer = (char *)calloc(((bytesRemaining + 2) / 3) * 4, 
+    char *outputBuffer = (char *)calloc((int)(ceilf((((float)bytesRemaining + 2) * 4) / 3)) + 1,
         sizeof(char));
     char *outputWriter = outputBuffer;
 
